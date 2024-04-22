@@ -6,6 +6,7 @@ import Activities from "./Activities";
 import SingleActivity from "./SingleActivity";
 import SingleAssociation from "./SingleAssociation";
 import SingleVolunteer from "./SingleVolunteer";
+import Layout from "./Layout";
 
 export {
   Associations,
@@ -16,4 +17,5 @@ export {
   SingleActivity,
   SingleVolunteer,
   SingleAssociation,
+  Layout,
 };
