@@ -11,9 +11,9 @@ function Layout() {
       {isPageLoading ? (
         <p>Loading</p>
       ) : (
-        <section className="align-element py-20 min-h-screen">
+        <main className="align-element py-12">
           <Outlet />
-        </section>
+        </main>
       )}
       <Footer />
     </>

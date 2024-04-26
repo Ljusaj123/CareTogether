@@ -44,10 +44,13 @@ function Footer() {
         <nav>
           <h6 className="footer-title">Social</h6>
           <div className="grid grid-flow-col gap-4">
-            <a className="link text-2xl">
+            <a className="link text-2xl" href="https://github.com/Ljusaj123">
               <FaGithub className="text-primary" />
             </a>
-            <a className="link text-2xl">
+            <a
+              className="link text-2xl"
+              href="https://www.linkedin.com/in/rosana-lju%C5%A1aj-61765429a/"
+            >
               <FaLinkedin className="text-primary" />
             </a>
           </div>
