@@ -1,9 +1,12 @@
 import React from "react";
 import { IoFilterOutline } from "react-icons/io5";
+import Select from "./Select";
+import Input from "./Input";
+import RadioGroup from "./RadioGroup";
 
 function Filter() {
   return (
-    <div className="drawer">
+    <div className="grid drawer-end">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* Page content here */}
@@ -17,15 +20,19 @@ function Filter() {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-          {/* Sidebar content here */}
-          <li>
-            <a>Sidebar Item 1</a>
-          </li>
-          <li>
-            <a>Sidebar Item 2</a>
-          </li>
-        </ul>
+
+        <div className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+          <h2 className="text-2xl my-8">Add filters</h2>
+          <form action="">
+            <Input />
+            <Select />
+            <RadioGroup />
+            <Input />
+            <button className="btn btn-secondary" type="submit">
+              Filter
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
