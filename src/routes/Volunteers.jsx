@@ -6,10 +6,13 @@ import { FaTrash } from "react-icons/fa";
 function Volunteers() {
   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchVolunteers = async () => {
+    setIsLoading(true);
     axios.get(`http://localhost:3001/volunteers`).then((response) => {
       setData(response.data);
+      setIsLoading(false);
     });
   };
 
@@ -19,6 +22,7 @@ function Volunteers() {
 
   const handleCreateNew = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     axios.post(`http://localhost:3001/volunteers`, form).then(() => {
       console.log("created");
       fetchVolunteers();
@@ -26,11 +30,16 @@ function Volunteers() {
   };
 
   const handleDelete = (id) => {
+    setIsLoading(true);
     axios.delete(`http://localhost:3001/volunteers/${id}`).then(() => {
       console.log("deleted");
       fetchVolunteers();
     });
   };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
@@ -80,6 +89,10 @@ function Volunteers() {
         </CreateNew>
         <Filter />
       </div>
+
+      {data.length === 0 && (
+        <p className="text-center">There are no volunteers...</p>
+      )}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 pt-12">
         {data.map((x) => {
           return (

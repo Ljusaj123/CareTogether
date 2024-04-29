@@ -1,8 +1,7 @@
-
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import  {Input} from "../components";
+import { Input } from "../components";
 
 function SingleActivity() {
   const { id } = useParams();

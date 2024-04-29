@@ -10,6 +10,7 @@ function CreateNew({ children }) {
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box text-center">
           <h2 className="text-2xl font-bold text-primary mb-8">Create new</h2>
+          <p className="text-secondary">All field are required</p>
           {children}
         </div>
         <form method="dialog" className="modal-backdrop">

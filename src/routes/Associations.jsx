@@ -6,6 +6,7 @@ import { FaTrash } from "react-icons/fa";
 function Associations() {
   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchAssociations = async () => {
     axios.get(`http://localhost:3001/associations`).then((response) => {
@@ -31,6 +32,10 @@ function Associations() {
       fetchAssociations();
     });
   };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
@@ -77,6 +82,11 @@ function Associations() {
         </CreateNew>
         <Filter />
       </div>
+
+      {data.length === 0 && (
+        <p className="text-center">There are no associations...</p>
+      )}
+
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 pt-12">
         {data.map((x) => {
           return (

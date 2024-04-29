@@ -4,37 +4,43 @@
       "name": "Community Action Coalition",
       "address": "123 Main Street",
       "town": "Springfield",
-      "description": "The Community Action Coalition works to address social and economic issues within the community through various programs and initiatives, including education, advocacy, and outreach."
+      "description": "The Community Action Coalition works to address social and economic issues within the community through various programs and initiatives, including education, advocacy, and outreach.",
+      "id": "86c6"
     },
     {
       "name": "Green Earth Society",
       "address": "456 Elm Avenue",
       "town": "Oakville",
-      "description": "The Green Earth Society focuses on environmental conservation and sustainability efforts, such as tree planting, recycling programs, and raising awareness about climate change."
+      "description": "The Green Earth Society focuses on environmental conservation and sustainability efforts, such as tree planting, recycling programs, and raising awareness about climate change.",
+      "id": "0c12"
     },
     {
       "name": "Helping Hands Foundation",
       "address": "789 Pine Road",
       "town": "Meadowview",
-      "description": "The Helping Hands Foundation provides support and assistance to individuals and families in need through food drives, financial aid programs, and community outreach initiatives."
+      "description": "The Helping Hands Foundation provides support and assistance to individuals and families in need through food drives, financial aid programs, and community outreach initiatives.",
+      "id": "1011"
     },
     {
       "name": "Animal Welfare League",
       "address": "321 Oak Street",
       "town": "Willowbrook",
-      "description": "The Animal Welfare League is dedicated to the welfare and protection of animals, including rescue, rehabilitation, and adoption programs for stray and abandoned pets."
+      "description": "The Animal Welfare League is dedicated to the welfare and protection of animals, including rescue, rehabilitation, and adoption programs for stray and abandoned pets.",
+      "id": "de56"
     },
     {
       "name": "Senior Support Center",
       "address": "555 Maple Lane",
       "town": "Cedarville",
-      "description": "The Senior Support Center offers a range of services and activities to enhance the well-being and quality of life for elderly members of the community, including social events, health workshops, and assistance programs."
+      "description": "The Senior Support Center offers a range of services and activities to enhance the well-being and quality of life for elderly members of the community, including social events, health workshops, and assistance programs.",
+      "id": "d097"
     },
     {
       "name": "Children's Education Initiative",
       "address": "987 Cedar Avenue",
       "town": "Riverside",
-      "description": "The Children's Education Initiative focuses on improving educational opportunities and outcomes for children in the community through tutoring programs, after-school activities, and advocacy efforts."
+      "description": "The Children's Education Initiative focuses on improving educational opportunities and outcomes for children in the community through tutoring programs, after-school activities, and advocacy efforts.",
+      "id": "97e0"
     }
   ],
   "activities": [
