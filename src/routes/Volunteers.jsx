@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { CreateNew, Input, Filter, Title, Card } from "../components";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
+import { FiEdit3 } from "react-icons/fi";
 
 function Volunteers() {
   const [data, setData] = useState([]);
@@ -36,6 +37,8 @@ function Volunteers() {
       fetchVolunteers();
     });
   };
+
+  const handleEdit = (id) => {};
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -120,9 +123,14 @@ function Volunteers() {
                     return <span>{a}</span>;
                   })}
               </p>
-              <button className="btn btn-error">
-                <FaTrash onClick={() => handleDelete(x.id)} />
-              </button>
+              <div className="flex gap-4">
+                <button className="btn btn-error">
+                  <FaTrash onClick={() => handleDelete(x.id)} />
+                </button>
+                <button className="btn btn-warning">
+                  <FiEdit3 onClick={() => handleEdit(x.id)} />
+                </button>
+              </div>
             </Card>
           );
         })}
