@@ -9,7 +9,6 @@ function Filter() {
     <div className="grid drawer-end">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
-        {/* Page content here */}
         <label htmlFor="my-drawer" className="btn btn-primary drawer-button">
           <IoFilterOutline /> Filter
         </label>
@@ -25,7 +24,7 @@ function Filter() {
           <h2 className="text-2xl my-8">Add filters</h2>
           <form action="">
             <Input />
-            <Select />
+            <Select label="sort by" options={["name a-z", "name z-a"]} />
             <RadioGroup />
             <Input />
             <button className="btn btn-secondary" type="submit">

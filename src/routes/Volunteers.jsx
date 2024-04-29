@@ -1,67 +1,118 @@
-import React from "react";
-import Card from "../components/Card";
-import Filter from "../components/Filter";
-import Title from "../components/Title";
-import Select from "../components/Select";
-
-const data = [
-  {
-    name: "Alice Johnson",
-    age: 25,
-    email: "alice@example.com",
-    phone: "123-456-7890",
-    association: "Community Action Coalition",
-  },
-  {
-    name: "David Smith",
-    age: 30,
-    email: "david@example.com",
-    phone: "234-567-8901",
-    association: "Green Earth Society",
-  },
-  {
-    name: "Emily Brown",
-    age: 22,
-    email: "emily@example.com",
-    phone: "345-678-9012",
-    association: "Helping Hands Foundation",
-  },
-  {
-    name: "Michael Wilson",
-    age: 28,
-    email: "michael@example.com",
-    phone: "456-789-0123",
-    association: "Animal Welfare League",
-  },
-  {
-    name: "Sophia Martinez",
-    age: 26,
-    email: "sophia@example.com",
-    phone: "567-890-1234",
-    association: "Senior Support Center",
-  },
-  {
-    name: "James Taylor",
-    age: 35,
-    email: "james@example.com",
-    phone: "678-901-2345",
-    association: "Children's Education Initiative",
-  },
-];
+import { useEffect, useState } from "react";
+import { CreateNew, Input, Filter, Title, Card } from "../components";
+import axios from "axios";
+import { FaTrash } from "react-icons/fa";
 
 function Volunteers() {
+  const [data, setData] = useState([]);
+  const [form, setForm] = useState({});
+
+  const fetchVolunteers = async () => {
+    axios.get(`http://localhost:3001/volunteers`).then((response) => {
+      setData(response.data);
+    });
+  };
+
+  useEffect(() => {
+    fetchVolunteers();
+  }, []);
+
+  const handleCreateNew = (e) => {
+    e.preventDefault();
+    axios.post(`http://localhost:3001/volunteers`, form).then(() => {
+      console.log("created");
+      fetchVolunteers();
+    });
+  };
+
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:3001/volunteers/${id}`).then(() => {
+      console.log("deleted");
+      fetchVolunteers();
+    });
+  };
+
   return (
     <div>
       <Title title="Volunteers" />
       <div className="divider"></div>
-      <div className="flex justify-end items-center">
-        <Select />
+      <div className="flex justify-end items-center gap-4">
+        <CreateNew>
+          <form
+            className="flex flex-col gap-8 items-center"
+            onSubmit={handleCreateNew}
+          >
+            <Input
+              type="text"
+              name="name"
+              label="name"
+              required={true}
+              setForm={setForm}
+            />
+            <Input
+              type="email"
+              name="email"
+              label="email"
+              required={true}
+              setForm={setForm}
+            />
+            <Input
+              type="text"
+              name="location"
+              label="location"
+              required={true}
+              setForm={setForm}
+            />
+            <Input
+              type="text"
+              name="association"
+              label="association"
+              required={true}
+              setForm={setForm}
+            />
+            {/* // interests */}
+            {/* availability */}
+
+            <button type="submit" className="btn btn-primary">
+              Create
+            </button>
+          </form>
+        </CreateNew>
         <Filter />
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 pt-12">
-        {/* {data.map((x, index) => {
-          return <Card data={x} key={index} />;
-        })} */}
+        {data.map((x) => {
+          return (
+            <Card key={x.id}>
+              <h3 className="card-title capitalize font-medium text-xl text-primary">
+                {x.name}
+              </h3>
+              <p className=" text-lg text-secondary font-bold">
+                {x.association}
+              </p>
+              <h4 className="text-md text-neutral">{x.email}</h4>
+              <h4 className="capitalize text-md text-neutral">{x.location}</h4>
+              <p>
+                Interests:
+                {x.interests &&
+                  x.interests.map((interest) => {
+                    return <span>{interest}</span>;
+                  })}
+              </p>
+
+              <p>
+                Availability:{" "}
+                {x.availability &&
+                  x.availability.map((a) => {
+                    return <span>{a}</span>;
+                  })}
+              </p>
+              <button className="btn btn-error">
+                <FaTrash onClick={() => handleDelete(x.id)} />
+              </button>
+            </Card>
+          );
+        })}
       </div>
     </div>
   );

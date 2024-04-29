@@ -11,7 +11,7 @@ function Layout() {
       {isPageLoading ? (
         <p>Loading</p>
       ) : (
-        <main className="align-element py-12">
+        <main className="align-element py-12 min-h-cover-screen">
           <Outlet />
         </main>
       )}

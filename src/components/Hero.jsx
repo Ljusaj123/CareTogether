@@ -18,7 +18,7 @@ function Hero() {
 
           <NavLink
             className="capitalize bg-ghost text-primary"
-            to="/associations"
+            to="/activities"
           >
             <button className="btn btn-primary">Get Started</button>
           </NavLink>
