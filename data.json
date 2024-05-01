@@ -120,7 +120,7 @@
       "name": "Alice Johnson",
       "email": "alice@example.com",
       "association": "Community Action Coalition",
-      "location": "Springfield, USA",
+      "town": "Springfield",
       "interests": [
         "Community service",
         "Environmental activism"
@@ -135,7 +135,7 @@
       "name": "David Smith",
       "email": "david@example.com",
       "association": "Green Earth Society",
-      "location": "Oakville, Canada",
+      "town": "Oakville",
       "interests": [
         "Sustainability",
         "Outdoor activities"
@@ -150,7 +150,7 @@
       "name": "Emily Brown",
       "email": "emily@example.com",
       "association": "Helping Hands Foundation",
-      "location": "Meadowview, USA",
+      "town": "Meadowview",
       "interests": [
         "Humanitarian aid",
         "Social justice"
@@ -164,7 +164,7 @@
       "name": "Michael Wilson",
       "email": "michael@example.com",
       "association": "Animal Welfare League",
-      "location": "Cedarville, USA",
+      "town": "Cedarville",
       "interests": [
         "Animal welfare",
         "Veterinary science"
@@ -179,7 +179,7 @@
       "name": "Sophia Martinez",
       "email": "sophia@example.com",
       "association": "Senior Support Center",
-      "location": "Maple Lane, USA",
+      "town": "Maple Lane",
       "interests": [
         "Elderly care",
         "Community support"
@@ -194,7 +194,7 @@
       "name": "James Taylor",
       "email": "james@example.com",
       "association": "Children's Education Initiative",
-      "location": "Riverside, USA",
+      "town": "Riverside",
       "interests": [
         "Education",
         "Child development"

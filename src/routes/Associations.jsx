@@ -80,7 +80,6 @@ function Associations() {
             </button>
           </form>
         </CreateNew>
-        <Filter />
       </div>
 
       {data.length === 0 && (

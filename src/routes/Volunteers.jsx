@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CreateNew, Input, Filter, Title, Card } from "../components";
+import { CreateNew, Input, Filter, Title, Card, Select } from "../components";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 import { FiEdit3 } from "react-icons/fi";
@@ -8,8 +8,9 @@ function Volunteers() {
   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [filter, setFilter] = useState({});
 
-  const fetchVolunteers = async () => {
+  const fetchVolunteers = () => {
     setIsLoading(true);
     axios.get(`http://localhost:3001/volunteers`).then((response) => {
       setData(response.data);
@@ -36,6 +37,22 @@ function Volunteers() {
       console.log("deleted");
       fetchVolunteers();
     });
+  };
+
+  const handleFilter = () => {
+    setIsLoading(true);
+    axios
+      .get(
+        `http://localhost:3001/volunteers/?town=${filter.town}&associations=${filter.association}`
+      )
+      .then((response) => {
+        setData(response.data);
+        setIsLoading(false);
+      });
+  };
+
+  const removeFilters = () => {
+    fetchVolunteers();
   };
 
   const handleEdit = (id) => {};
@@ -70,8 +87,8 @@ function Volunteers() {
             />
             <Input
               type="text"
-              name="location"
-              label="location"
+              name="town"
+              label="town"
               required={true}
               setForm={setForm}
             />
@@ -90,7 +107,40 @@ function Volunteers() {
             </button>
           </form>
         </CreateNew>
-        <Filter />
+        <Filter>
+          <form onSubmit={handleFilter}>
+            <Select
+              label="Town"
+              name="town"
+              options={["Springfield", "Oakville", "Meadowview"]}
+              setValue={(name, value) =>
+                setFilter((prev) => {
+                  return { ...prev, [name]: value };
+                })
+              }
+            />
+            <Select
+              label="Association"
+              name="association"
+              options={[
+                "Helping Hands Foundation",
+                "Green Earth Society",
+                "Community Action Coalition",
+              ]}
+              setValue={(name, value) =>
+                setFilter((prev) => {
+                  return { ...prev, [name]: value };
+                })
+              }
+            />
+            <button className="btn btn-primary mt-8 mr-4" type="submit">
+              Filter
+            </button>
+            <button className="btn btn-secondary" onClick={removeFilters}>
+              Remove Filters
+            </button>
+          </form>
+        </Filter>
       </div>
 
       {data.length === 0 && (
@@ -107,20 +157,20 @@ function Volunteers() {
                 {x.association}
               </p>
               <h4 className="text-md text-neutral">{x.email}</h4>
-              <h4 className="capitalize text-md text-neutral">{x.location}</h4>
+              <h4 className="capitalize text-md text-neutral">{x.town}</h4>
               <p>
                 Interests:
                 {x.interests &&
-                  x.interests.map((interest) => {
-                    return <span>{interest}</span>;
+                  x.interests.map((interest, index) => {
+                    return <span key={index}>{interest}</span>;
                   })}
               </p>
 
               <p>
                 Availability:{" "}
                 {x.availability &&
-                  x.availability.map((a) => {
-                    return <span>{a}</span>;
+                  x.availability.map((a, index) => {
+                    return <span key={index}>{a}</span>;
                   })}
               </p>
               <div className="flex gap-4">

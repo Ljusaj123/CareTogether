@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CreateNew, Input, Filter, Title, List } from "../components";
+import { CreateNew, Input, Title, List, Select } from "../components";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 
@@ -10,11 +10,18 @@ function Activities() {
 
   const fetchActivities = () => {
     setIsLoading(true);
-    axios.get(`http://localhost:3001/activities`).then((response) => {
-      setData(response.data);
-      setIsLoading(false);
-    });
+    axios
+      .get(`http://localhost:3001/activities`)
+      .then((response) => {
+        setData(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  useEffect(() => {});
 
   useEffect(() => {
     fetchActivities();
@@ -27,6 +34,24 @@ function Activities() {
       return text;
     }
   }
+
+  const handleSort = (name, value) => {
+    let sortedData = [];
+    switch (value) {
+      case "Name A-Z":
+        sortedData = data.sort((a, b) =>
+          a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+        );
+        setData(sortedData);
+        break;
+      case "Name Z-A":
+        sortedData = data.sort((a, b) =>
+          a.name > b.name ? -1 : b.name > a.name ? 1 : 0
+        );
+        setData(sortedData);
+        break;
+    }
+  };
 
   const handleCreateNew = (e) => {
     setIsLoading(true);
@@ -108,7 +133,11 @@ function Activities() {
             </button>
           </form>
         </CreateNew>
-        <Filter />
+        <Select
+          options={["Name A-Z", "Name Z-A", "Oldest", "Recent"]}
+          setValue={handleSort}
+          name="sort"
+        />
       </div>
       <div className="grid mt-12 gap-y-8">
         {data.length === 0 && (

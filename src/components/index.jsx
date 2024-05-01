@@ -6,7 +6,6 @@ import CreateNew from "./CreateNew";
 import Filter from "./Filter";
 import Input from "./Input";
 import List from "./List";
-import RadioGroup from "./RadioGroup";
 import Select from "./Select";
 import Title from "./Title";
 
@@ -20,6 +19,5 @@ export {
   Input,
   Select,
   Title,
-  RadioGroup,
   List,
 };
