@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { CreateNew, Input, Filter, Title, Card, Select } from "../components";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 import { FiEdit3 } from "react-icons/fi";
+import UserContext from "../context";
 
 function Volunteers() {
   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [filter, setFilter] = useState({});
+  const { isAdmin } = useContext(UserContext);
 
   const fetchVolunteers = () => {
     setIsLoading(true);
@@ -173,14 +175,16 @@ function Volunteers() {
                     return <span key={index}>{a}</span>;
                   })}
               </p>
-              <div className="flex gap-4">
-                <button className="btn btn-error">
-                  <FaTrash onClick={() => handleDelete(x.id)} />
-                </button>
-                <button className="btn btn-warning">
-                  <FiEdit3 onClick={() => handleEdit(x.id)} />
-                </button>
-              </div>
+              {isAdmin && (
+                <div className="flex gap-4">
+                  <button className="btn btn-error">
+                    <FaTrash onClick={() => handleDelete(x.id)} />
+                  </button>
+                  <button className="btn btn-warning">
+                    <FiEdit3 onClick={() => handleEdit(x.id)} />
+                  </button>
+                </div>
+              )}
             </Card>
           );
         })}

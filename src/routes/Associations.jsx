@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { CreateNew, Input, Filter, Title, Card } from "../components";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
+import { useContext } from "react";
+import UserContext from "../context";
 
 function Associations() {
   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const { isAdmin } = useContext(UserContext);
 
   const fetchAssociations = async () => {
     axios.get(`http://localhost:3001/associations`).then((response) => {
@@ -97,9 +100,11 @@ function Associations() {
                 {x.address}, <span className="font-medium">{x.town}</span>
               </h4>
               <p>{x.description}</p>
-              <button className="btn btn-error">
-                <FaTrash onClick={() => handleDelete(x.id)} />
-              </button>
+              {isAdmin && (
+                <button className="btn btn-error">
+                  <FaTrash onClick={() => handleDelete(x.id)} />
+                </button>
+              )}
             </Card>
           );
         })}

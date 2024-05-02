@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function Select({ options, name, label, setValue }) {
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [selectedOption, setSelectedOption] = useState("");
 
   const handleSelectChange = (e) => {
     const { name, value } = e.target;
@@ -19,10 +19,12 @@ function Select({ options, name, label, setValue }) {
         )}
         <select
           onChange={handleSelectChange}
-          value={selectedOption}
           name={name}
           className="select select-bordered"
         >
+          <option disabled selected>
+            Select
+          </option>
           {options.map((option, index) => {
             return (
               <option value={option} key={index}>

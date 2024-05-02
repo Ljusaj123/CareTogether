@@ -2,11 +2,18 @@ import { useEffect, useState } from "react";
 import { CreateNew, Input, Title, List, Select } from "../components";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
+import { useContext } from "react";
+import UserContext from "../context";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns";
 
 function Activities() {
   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const { isAdmin } = useContext(UserContext);
 
   const fetchActivities = () => {
     setIsLoading(true);
@@ -21,11 +28,16 @@ function Activities() {
       });
   };
 
-  useEffect(() => {});
-
   useEffect(() => {
     fetchActivities();
   }, []);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    setForm((prev) => {
+      return { ...prev, date: new Date(date).toISOString() };
+    });
+  };
 
   function truncateText(text, maxLength) {
     if (text.length > maxLength) {
@@ -39,15 +51,31 @@ function Activities() {
     let sortedData = [];
     switch (value) {
       case "Name A-Z":
-        sortedData = data.sort((a, b) =>
+        sortedData = [...data].sort((a, b) =>
           a.name > b.name ? 1 : b.name > a.name ? -1 : 0
         );
         setData(sortedData);
         break;
       case "Name Z-A":
-        sortedData = data.sort((a, b) =>
+        sortedData = [...data].sort((a, b) =>
           a.name > b.name ? -1 : b.name > a.name ? 1 : 0
         );
+        setData(sortedData);
+        break;
+
+      case "Oldest":
+        sortedData = [...data]
+          .sort((a, b) => {
+            return new Date(a.date).getTime() - new Date(b.date).getTime();
+          })
+          .reverse();
+        setData(sortedData);
+        break;
+
+      case "Recent":
+        sortedData = [...data].sort((a, b) => {
+          return new Date(a.date).getTime() - new Date(b.date).getTime();
+        });
         setData(sortedData);
         break;
     }
@@ -63,8 +91,9 @@ function Activities() {
   };
 
   const handleDelete = (event, id) => {
+    event.stopImidiatePropagation();
+    event.preventDefault();
     setIsLoading(true);
-    event.stopPropagation();
     axios.delete(`http://localhost:3001/activities/${id}`).then(() => {
       console.log("deleted");
       fetchActivities();
@@ -80,59 +109,70 @@ function Activities() {
       <Title title="Activities" />
       <div className="divider"></div>
       <div className="flex justify-end items-center gap-4">
-        <CreateNew>
-          <form
-            className="flex flex-col gap-8 items-center"
-            onSubmit={handleCreateNew}
-          >
-            <Input
-              type="text"
-              name="name"
-              label="name"
-              setForm={setForm}
-              required={true}
-            />
-            <Input
-              type="date"
-              name="date"
-              label="date"
-              setForm={setForm}
-              required={true}
-            />
-            <Input
-              type="text"
-              name="location"
-              label="location"
-              setForm={setForm}
-              required={true}
-            />
-            <Input
-              type="text"
-              name="organization"
-              label="organization"
-              setForm={setForm}
-              required={true}
-            />
+        {true && (
+          <CreateNew>
+            <form
+              className="flex flex-col gap-8 items-center"
+              onSubmit={handleCreateNew}
+            >
+              <Input
+                type="text"
+                name="name"
+                label="name"
+                setForm={setForm}
+                required={true}
+              />
 
-            <label className="form-control w-full max-w-xs">
-              <div className="label capitalize">
-                <span className="label-text">Description</span>
-              </div>
-              <textarea
-                id="description"
-                name="description"
-                className="textarea textarea-primary w-full"
-                required
-                onChange={(e) =>
-                  setForm({ ...form, [e.target.name]: e.target.value })
-                }
-              ></textarea>
-            </label>
-            <button type="submit" className="btn btn-primary">
-              Create
-            </button>
-          </form>
-        </CreateNew>
+              <label className="form-control w-full max-w-xs">
+                <div className="label capitalize">
+                  <span className="label-text">Date and Time</span>
+                </div>
+                <DatePicker
+                  className="px-4 py-3 w-full border border-primary rounded-lg"
+                  selected={selectedDate}
+                  onChange={handleDateChange}
+                  dateFormat="yyyy-MM-dd HH:mm"
+                  showTimeInput
+                  required
+                />
+              </label>
+
+              <Input
+                type="text"
+                name="location"
+                label="location"
+                setForm={setForm}
+                required={true}
+              />
+              <Input
+                type="text"
+                name="organization"
+                label="organization"
+                setForm={setForm}
+                required={true}
+              />
+
+              <label className="form-control w-full max-w-xs">
+                <div className="label capitalize">
+                  <span className="label-text">Description</span>
+                </div>
+                <textarea
+                  id="description"
+                  name="description"
+                  className="textarea textarea-primary w-full"
+                  required
+                  onChange={(e) =>
+                    setForm({ ...form, [e.target.name]: e.target.value })
+                  }
+                ></textarea>
+              </label>
+              <button type="submit" className="btn btn-primary">
+                Create
+              </button>
+            </form>
+          </CreateNew>
+        )}
+
         <Select
           options={["Name A-Z", "Name Z-A", "Oldest", "Recent"]}
           setValue={handleSort}
@@ -146,7 +186,7 @@ function Activities() {
         {data &&
           data.map((x, index) => {
             return (
-              <List url="activities" id={x.id} key={index}>
+              <List url="activities" id={x.id} key={index} className="relative">
                 <div className="ml-0 sm:ml-16">
                   <h3 className="card-title capitalize font-medium text-xl mb-12">
                     {x.name}
@@ -155,12 +195,14 @@ function Activities() {
                     {truncateText(x.description, 150)}
                   </h4>
                   <p className="text-secondary font-medium sm:ml-auto mt-4">
-                    {x.date}
+                    {format(new Date(x.date), "yyyy-MM-dd h:mm a")}
                   </p>
                 </div>
-                <button className="btn btn-error z-10">
-                  <FaTrash onClick={(event) => handleDelete(event, x.id)} />
-                </button>
+                {isAdmin && (
+                  <button className="btn btn-error absolute bottom-5 right-5">
+                    <FaTrash onClick={(event) => handleDelete(event, x.id)} />
+                  </button>
+                )}
               </List>
             );
           })}

@@ -3,11 +3,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Input } from "../components";
 import { FaTrash } from "react-icons/fa6";
+import { useContext } from "react";
+import UserContext from "../context";
 
 function SingleActivity() {
   const { id } = useParams();
   const [activity, setActivity] = useState([]);
   const [form, setForm] = useState({});
+  const { isAdmin } = useContext(UserContext);
 
   const fetchActivities = async () => {
     axios.get(`http://localhost:3001/activities/${id}`).then((response) => {
@@ -86,12 +89,14 @@ function SingleActivity() {
             return (
               <div className="flex items-center justify-between" key={index}>
                 <p className="text-lg my-4">{applicant}</p>
-                <button
-                  className="btn btn-error"
-                  onClick={(e) => handleDelete(e, applicant)}
-                >
-                  <FaTrash />
-                </button>
+                {isAdmin && (
+                  <button
+                    className="btn btn-error"
+                    onClick={(e) => handleDelete(e, applicant)}
+                  >
+                    <FaTrash />
+                  </button>
+                )}
               </div>
             );
           })}

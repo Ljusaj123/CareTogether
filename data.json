@@ -41,14 +41,49 @@
       "town": "Riverside",
       "description": "The Children's Education Initiative focuses on improving educational opportunities and outcomes for children in the community through tutoring programs, after-school activities, and advocacy efforts.",
       "id": "97e0"
+    },
+    {
+      "id": "26a7",
+      "name": "Rosana Ljušaj",
+      "address": "ULICA KACETINE STINICE 23",
+      "town": "KAŠTEL SUĆURAC",
+      "description": "cnvcnv"
+    },
+    {
+      "id": "06a5",
+      "name": "Rosana Ljušaj",
+      "address": "ULICA KACETINE STINICE 23",
+      "town": "KAŠTEL SUĆURAC",
+      "description": "cnvcnv"
+    },
+    {
+      "id": "6e53",
+      "name": "Rosana Ljušaj",
+      "address": "ULICA KACETINE STINICE 23",
+      "town": "KAŠTEL SUĆURAC",
+      "description": "cnvcnv"
+    },
+    {
+      "id": "ba70",
+      "name": "Rosana Ljušaj",
+      "address": "ULICA KACETINE STINICE 23",
+      "town": "KAŠTEL SUĆURAC",
+      "description": "cnvcnv"
+    },
+    {
+      "id": "51ea",
+      "name": "Rosana Ljušaj",
+      "address": "ULICA KACETINE STINICE 23",
+      "town": "KAŠTEL SUĆURAC",
+      "description": "cnvcnv"
     }
   ],
   "activities": [
     {
       "id": "1",
       "name": "Animal Shelter Volunteer",
-      "date": "05.05.2024. 10:00",
-      "description": "Join us for a fulfilling day of volunteering at the local animal shelter. You'll have the opportunity to interact with adorable dogs and cats, providing them with care, love, and attention. Whether you're walking dogs, cleaning kennels, or socializing with the animals, your contribution will make a meaningful difference in their lives..",
+      "date": "2024-05-13T10:00:00.000Z",
+      "description": "Join us for a fulfilling day of volunteering at the local animal shelter. You'll have the opportunity to interact with adorable dogs and cats, providing them with care, love, and attention. Whether you're walking dogs, cleaning kennels, or socializing with the animals, your contribution will make a meaningful difference in their lives.",
       "applicants": [
         "John Doe",
         "Jane Smith",
@@ -63,7 +98,7 @@
     {
       "id": "2",
       "name": "Tree Planting Event",
-      "date": "12.05.2024. 12:00",
+      "date": "2024-05-12T12:00:00.000Z",
       "description": "Be a part of our efforts to greenify the community by joining our tree planting event. Together, we'll make our environment greener, healthier, and more sustainable for future generations. Planting trees not only beautifies the landscape but also helps combat climate change and provides habitat for wildlife.",
       "applicants": [
         "Sarah Brown",
@@ -77,7 +112,7 @@
     {
       "id": "3",
       "name": "Soup Kitchen Assistance",
-      "date": "18.05.2024. 16:00",
+      "date": "2024-05-10T10:00:00.000Z",
       "description": "Volunteer your time to make a difference in the lives of those in need by assisting at our local soup kitchen. By serving meals and providing companionship, you'll help alleviate hunger and loneliness within our community. Your kindness and support will bring warmth and comfort to those who need it most.",
       "applicants": [
         "David Wilson",
@@ -90,7 +125,7 @@
     {
       "id": "4",
       "name": "Elderly Care Workshop",
-      "date": "02.06.2024. 17:00",
+      "date": "2024-05-11T10:00:00.000Z",
       "description": "Join us for an informative workshop on elderly care where you'll learn valuable skills and techniques for providing support and assistance to seniors in our community. Whether you're a caregiver, family member, or simply interested in helping the elderly, this workshop will provide you with practical knowledge and resources to make a positive impact in the lives of older adults.",
       "applicants": [
         "Jessica Adams",
@@ -103,7 +138,7 @@
     {
       "id": "5",
       "name": "Habitat Restoration Project",
-      "date": "15.06.2024. 14:00",
+      "date": "2024-05-09T10:00:00.000Z",
       "description": "Join our conservation efforts by participating in our habitat restoration project. By removing invasive species and planting native vegetation, we'll work together to restore and preserve the natural habitats of our local ecosystems. Your involvement will help enhance biodiversity, protect endangered species, and promote the health of our environment for future generations to enjoy.",
       "applicants": [
         "Daniel Taylor",
@@ -112,6 +147,14 @@
       ],
       "organization": "Nature Preservation Society",
       "location": "987 Cedar Avenue, Riverside"
+    },
+    {
+      "id": "599f",
+      "name": "Rosana",
+      "location": "splita",
+      "date": "2024-05-08T22:15:59.000Z",
+      "organization": "dgfd",
+      "description": "dfgkhljhkgjfdsadfm,"
     }
   ],
   "volunteers": [
@@ -203,6 +246,13 @@
         "Weekends",
         "Evenings"
       ]
+    },
+    {
+      "id": "c94c",
+      "name": "Rosana Ljušaj",
+      "email": "ljusajrosana@gmail.com",
+      "town": "KAŠTEL SUĆURAC",
+      "association": "cgjfmgm"
     }
   ]
 }

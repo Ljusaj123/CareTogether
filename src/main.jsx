@@ -7,8 +7,6 @@ import {
   Activities,
   Associations,
   SingleActivity,
-  SingleVolunteer,
-  SingleAssociation,
   Layout,
 } from "./routes";
 import "./index.css";
@@ -33,18 +31,8 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
-        path: "/associations/:id",
-        element: <SingleAssociation />,
-        errorElement: <ErrorPage />,
-      },
-      {
         path: "/volunteers",
         element: <Volunteers />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: "/volunteers/:id",
-        element: <SingleVolunteer />,
         errorElement: <ErrorPage />,
       },
       {
