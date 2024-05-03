@@ -7,7 +7,7 @@ function List({ url, id, children }) {
   return (
     <Link
       to={`/${url}/${id}`}
-      className="relative shadow-xl hover:shadow-2xl duration-300 transition p-8 rounded-xl flex flex-col sm:flex-row gap-y-4 bg-base-100 group mx-24"
+      className="shadow-xl hover:shadow-2xl duration-300 transition p-8 rounded-xl flex flex-col sm:flex-row gap-y-4 bg-base-100 group mx-24"
     >
       <figure>
         <img

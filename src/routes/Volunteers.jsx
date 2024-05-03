@@ -41,16 +41,12 @@ function Volunteers() {
     });
   };
 
-  const handleFilter = () => {
-    setIsLoading(true);
-    axios
-      .get(
-        `http://localhost:3001/volunteers/?town=${filter.town}&associations=${filter.association}`
-      )
-      .then((response) => {
-        setData(response.data);
-        setIsLoading(false);
-      });
+  const handleFilter = (e) => {
+    // e.preventDefault();
+    // const filteredData = data.filter((x) => {
+    //   return x.town === filter.town || x.association === filter.association;
+    // });
+    // setData(filteredData);
   };
 
   const removeFilters = () => {
@@ -177,11 +173,17 @@ function Volunteers() {
               </p>
               {isAdmin && (
                 <div className="flex gap-4">
-                  <button className="btn btn-error">
-                    <FaTrash onClick={() => handleDelete(x.id)} />
+                  <button
+                    className="btn btn-error"
+                    onClick={() => handleDelete(x.id)}
+                  >
+                    <FaTrash />
                   </button>
-                  <button className="btn btn-warning">
-                    <FiEdit3 onClick={() => handleEdit(x.id)} />
+                  <button
+                    className="btn btn-warning"
+                    onClick={() => handleEdit(x.id)}
+                  >
+                    <FiEdit3 />
                   </button>
                 </div>
               )}

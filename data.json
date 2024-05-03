@@ -43,39 +43,12 @@
       "id": "97e0"
     },
     {
-      "id": "26a7",
+      "id": "866e",
       "name": "Rosana Ljušaj",
       "address": "ULICA KACETINE STINICE 23",
       "town": "KAŠTEL SUĆURAC",
-      "description": "cnvcnv"
-    },
-    {
-      "id": "06a5",
-      "name": "Rosana Ljušaj",
-      "address": "ULICA KACETINE STINICE 23",
-      "town": "KAŠTEL SUĆURAC",
-      "description": "cnvcnv"
-    },
-    {
-      "id": "6e53",
-      "name": "Rosana Ljušaj",
-      "address": "ULICA KACETINE STINICE 23",
-      "town": "KAŠTEL SUĆURAC",
-      "description": "cnvcnv"
-    },
-    {
-      "id": "ba70",
-      "name": "Rosana Ljušaj",
-      "address": "ULICA KACETINE STINICE 23",
-      "town": "KAŠTEL SUĆURAC",
-      "description": "cnvcnv"
-    },
-    {
-      "id": "51ea",
-      "name": "Rosana Ljušaj",
-      "address": "ULICA KACETINE STINICE 23",
-      "town": "KAŠTEL SUĆURAC",
-      "description": "cnvcnv"
+      "description": "adgsgd",
+      "requested": true
     }
   ],
   "activities": [
@@ -85,12 +58,11 @@
       "date": "2024-05-13T10:00:00.000Z",
       "description": "Join us for a fulfilling day of volunteering at the local animal shelter. You'll have the opportunity to interact with adorable dogs and cats, providing them with care, love, and attention. Whether you're walking dogs, cleaning kennels, or socializing with the animals, your contribution will make a meaningful difference in their lives.",
       "applicants": [
-        "John Doe",
         "Jane Smith",
         "Alice Johnson",
-        "Rosan",
-        "Rosan asdfsgd",
-        "gddfd afdsdfdss"
+        "John Doe",
+        "John Doe",
+        "Rosan Ljušaj"
       ],
       "organization": "Paws for Hope",
       "location": "123 Oak Street, Springfield"
@@ -117,10 +89,13 @@
       "applicants": [
         "David Wilson",
         "Sophia Lee",
-        "Robert Johnson"
+        "Robert Johnson",
+        "Rosana Ljušaj",
+        "ana asdfsgd"
       ],
       "organization": "Community Cares Foundation",
-      "location": "789 Pine Road, Meadowview"
+      "location": "789 Pine Road, Meadowview",
+      "app": []
     },
     {
       "id": "4",
@@ -147,14 +122,6 @@
       ],
       "organization": "Nature Preservation Society",
       "location": "987 Cedar Avenue, Riverside"
-    },
-    {
-      "id": "599f",
-      "name": "Rosana",
-      "location": "splita",
-      "date": "2024-05-08T22:15:59.000Z",
-      "organization": "dgfd",
-      "description": "dfgkhljhkgjfdsadfm,"
     }
   ],
   "volunteers": [
@@ -246,13 +213,6 @@
         "Weekends",
         "Evenings"
       ]
-    },
-    {
-      "id": "c94c",
-      "name": "Rosana Ljušaj",
-      "email": "ljusajrosana@gmail.com",
-      "town": "KAŠTEL SUĆURAC",
-      "association": "cgjfmgm"
     }
   ]
 }

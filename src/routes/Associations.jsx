@@ -4,6 +4,7 @@ import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 import { useContext } from "react";
 import UserContext from "../context";
+import { FaCheck } from "react-icons/fa";
 
 function Associations() {
   const [data, setData] = useState([]);
@@ -12,8 +13,10 @@ function Associations() {
   const { isAdmin } = useContext(UserContext);
 
   const fetchAssociations = async () => {
+    setIsLoading(true);
     axios.get(`http://localhost:3001/associations`).then((response) => {
       setData(response.data);
+      setIsLoading(false);
     });
   };
 
@@ -22,18 +25,30 @@ function Associations() {
   }, []);
 
   const handleDelete = (id) => {
+    setIsLoading(true);
     axios.delete(`http://localhost:3001/associations/${id}`).then(() => {
       console.log("deleted");
       fetchAssociations();
     });
   };
 
-  const handleCreateNew = (e) => {
+  const handleCheck = (e, id) => {
     e.preventDefault();
-    axios.post(`http://localhost:3001/associations`, form).then(() => {
-      console.log("created");
-      fetchAssociations();
-    });
+    // axios.patch(`http://localhost:3001/associations/${id}`).then(() => {
+    //   console.log("applied");
+    //   fetchAssociations();
+    // });
+  };
+
+  const handleCreateNew = (e) => {
+    setIsLoading(true);
+    e.preventDefault();
+    axios
+      .post(`http://localhost:3001/associations`, { ...form, requested: true })
+      .then(() => {
+        console.log("created");
+        fetchAssociations();
+      });
   };
 
   if (isLoading) {
@@ -89,24 +104,65 @@ function Associations() {
         <p className="text-center">There are no associations...</p>
       )}
 
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 pt-12 mb-24">
+        {data.map((x) => {
+          if (!x.requested) {
+            return (
+              <Card url="associations" id={x.id} key={x.id}>
+                <h3 className="card-title capitalize font-medium text-xl text-primary">
+                  {x.name}
+                </h3>
+                <h4 className="capitalize text-md text-secondary">
+                  {x.address}, <span className="font-medium">{x.town}</span>
+                </h4>
+                <p>{x.description}</p>
+                {isAdmin && (
+                  <button
+                    className="btn btn-error"
+                    onClick={() => handleDelete(x.id)}
+                  >
+                    <FaTrash />
+                  </button>
+                )}
+              </Card>
+            );
+          }
+        })}
+      </div>
+
+      <Title title="Requests waiting to approve" />
+      <div className="divider"></div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 pt-12">
         {data.map((x) => {
-          return (
-            <Card url="associations" id={x.id} key={x.id}>
-              <h3 className="card-title capitalize font-medium text-xl text-primary">
-                {x.name}
-              </h3>
-              <h4 className="capitalize text-md text-secondary">
-                {x.address}, <span className="font-medium">{x.town}</span>
-              </h4>
-              <p>{x.description}</p>
-              {isAdmin && (
-                <button className="btn btn-error">
-                  <FaTrash onClick={() => handleDelete(x.id)} />
-                </button>
-              )}
-            </Card>
-          );
+          if (x.requested && isAdmin) {
+            return (
+              <Card url="associations" id={x.id} key={x.id}>
+                <h3 className="card-title capitalize font-medium text-xl text-primary">
+                  {x.name}
+                </h3>
+                <h4 className="capitalize text-md text-secondary">
+                  {x.address}, <span className="font-medium">{x.town}</span>
+                </h4>
+                <p>{x.description}</p>
+                {isAdmin && (
+                  <div className="flex gap-4">
+                    <button
+                      className="btn btn-error"
+                      onClick={() => handleDelete(x.id)}
+                    >
+                      <FaTrash />
+                    </button>
+                    <button
+                      className="btn btn-success"
+                      onClick={() => handleCheck(x.id)}
+                    >
+                      <FaCheck />
+                    </button>
+                  </div>
+                )}
+              </Card>
+            );
+          }
         })}
       </div>
     </div>

@@ -29,22 +29,23 @@ function SingleActivity() {
       .patch(`http://localhost:3001/activities/${id}`, { applicants })
       .then(() => {
         console.log("applied");
+        fetchActivities();
       });
   };
 
   const handleDelete = (e, applicant) => {
-    // e.preventDefault();
-    // const app = applicants.filter((x) => {
-    //   x === applicant;
-    //   // console.log(x);
-    //   // console.log(applicant);
-    // });
-    // console.log(app);
-    // axios
-    //   .patch(`http://localhost:3001/activities/${id}`, { applicants })
-    //   .then(() => {
-    //     console.log("deleted");
-    //   });
+    const filteredApplicants = applicants.filter((x) => {
+      return x !== applicant;
+    });
+    axios
+      .patch(`http://localhost:3001/activities/${id}`, {
+        ...activity,
+        applicants: filteredApplicants,
+      })
+      .then(() => {
+        console.log("deleted");
+        fetchActivities();
+      });
   };
 
   const { name, date, description, organization, applicants, location } =

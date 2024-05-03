@@ -91,8 +91,6 @@ function Activities() {
   };
 
   const handleDelete = (event, id) => {
-    event.stopImidiatePropagation();
-    event.preventDefault();
     setIsLoading(true);
     axios.delete(`http://localhost:3001/activities/${id}`).then(() => {
       console.log("deleted");
@@ -186,24 +184,31 @@ function Activities() {
         {data &&
           data.map((x, index) => {
             return (
-              <List url="activities" id={x.id} key={index} className="relative">
-                <div className="ml-0 sm:ml-16">
-                  <h3 className="card-title capitalize font-medium text-xl mb-12">
-                    {x.name}
-                  </h3>
-                  <h4 className=" text-md text-neutral-content">
-                    {truncateText(x.description, 150)}
-                  </h4>
-                  <p className="text-secondary font-medium sm:ml-auto mt-4">
-                    {format(new Date(x.date), "yyyy-MM-dd h:mm a")}
-                  </p>
-                </div>
+              <div className="relative">
+                <List
+                  url="activities"
+                  id={x.id}
+                  key={index}
+                  className="relative"
+                >
+                  <div className="ml-0 sm:ml-16">
+                    <h3 className="card-title capitalize font-medium text-xl mb-12">
+                      {x.name}
+                    </h3>
+                    <h4 className=" text-md text-neutral-content">
+                      {truncateText(x.description, 150)}
+                    </h4>
+                    <p className="text-secondary font-medium sm:ml-auto mt-4">
+                      {format(new Date(x.date), "yyyy-MM-dd h:mm a")}
+                    </p>
+                  </div>
+                </List>
                 {isAdmin && (
-                  <button className="btn btn-error absolute bottom-5 right-5">
+                  <button className="btn btn-error absolute bottom-5 right-32">
                     <FaTrash onClick={(event) => handleDelete(event, x.id)} />
                   </button>
                 )}
-              </List>
+              </div>
             );
           })}
       </div>
