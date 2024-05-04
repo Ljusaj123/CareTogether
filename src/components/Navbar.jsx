@@ -8,7 +8,10 @@ function Navbar() {
       <div className="navbar align-element px-8">
         <div className="navbar-start">
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <label
+              tabIndex={0}
+              className="btn btn-ghost md:hidden text-primary"
+            >
               <FaBarsStaggered className="h-6 w-6" />
             </label>
             <ul
@@ -19,18 +22,10 @@ function Navbar() {
             </ul>
           </div>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center hidden md:flex">
           <ul className="menu menu-horizontal">
             <NavLinks />
           </ul>
-        </div>
-
-        <div className="navbar-end">
-          <label className="swap swap-rotate ">
-            <input type="checkbox" />
-            <BsSunFill className="swap-off h-4 w-4" />
-            <BsMoonFill className="swap-on h-4 w-4" />
-          </label>
         </div>
       </div>
     </nav>

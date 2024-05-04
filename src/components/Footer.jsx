@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="footer p-10 bg-base-200 text-base-content w-full flex items-center justify-center gap-24">
+    <footer className="footer p-10 bg-base-200 text-base-content w-full flex flex-col md:flex-row items-center justify-center gap-24">
       <nav className="grid grid-flow-col gap-4">
         <ul className="flex gap-4 flex-col">
           {links.map((link) => {

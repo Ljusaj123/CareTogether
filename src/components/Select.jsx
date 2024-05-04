@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Select({ options, name, label, setValue }) {
+function Select({ options, name, label, setValue, defaultText }) {
   const [selectedOption, setSelectedOption] = useState("default");
 
   const handleSelectChange = (e) => {
@@ -24,7 +24,7 @@ function Select({ options, name, label, setValue }) {
           value={selectedOption}
         >
           <option disabled value="default">
-            Select
+            {defaultText ?? "Select"}
           </option>
           {options.map((option, index) => {
             return (

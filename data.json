@@ -41,14 +41,6 @@
       "town": "Riverside",
       "description": "The Children's Education Initiative focuses on improving educational opportunities and outcomes for children in the community through tutoring programs, after-school activities, and advocacy efforts.",
       "id": "97e0"
-    },
-    {
-      "id": "866e",
-      "name": "Rosana Ljušaj",
-      "address": "ULICA KACETINE STINICE 23",
-      "town": "KAŠTEL SUĆURAC",
-      "description": "adgsgd",
-      "requested": true
     }
   ],
   "activities": [
@@ -61,8 +53,7 @@
         "Jane Smith",
         "Alice Johnson",
         "John Doe",
-        "John Doe",
-        "Rosan Ljušaj"
+        "John Doe"
       ],
       "organization": "Paws for Hope",
       "location": "123 Oak Street, Springfield"

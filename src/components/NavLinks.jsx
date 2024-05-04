@@ -11,7 +11,6 @@ const NavLinks = () => {
     <>
       {links.map((link) => {
         const { id, url, text } = link;
-        if ((url === "checkout" || url === "orders") && !user) return null;
         return (
           <li key={id} className="mx-4">
             <NavLink className="capitalize bg-ghost text-primary" to={url}>

@@ -175,6 +175,7 @@ function Activities() {
           options={["Name A-Z", "Name Z-A", "Oldest", "Recent"]}
           setValue={handleSort}
           name="sort"
+          defaultText={"Sort by"}
         />
       </div>
       <div className="grid mt-12 gap-y-8">
