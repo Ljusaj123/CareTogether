@@ -130,41 +130,45 @@ function Associations() {
         })}
       </div>
 
-      <Title title="Requests waiting to approve" />
-      <div className="divider"></div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 pt-12">
-        {data.map((x) => {
-          if (x.requested && isAdmin) {
-            return (
-              <Card url="associations" id={x.id} key={x.id}>
-                <h3 className="card-title capitalize font-medium text-xl text-primary">
-                  {x.name}
-                </h3>
-                <h4 className="capitalize text-md text-secondary">
-                  {x.address}, <span className="font-medium">{x.town}</span>
-                </h4>
-                <p>{x.description}</p>
-                {isAdmin && (
-                  <div className="flex gap-4">
-                    <button
-                      className="btn btn-error"
-                      onClick={() => handleDelete(x.id)}
-                    >
-                      <FaTrash />
-                    </button>
-                    <button
-                      className="btn btn-success"
-                      onClick={() => handleCheck(x.id)}
-                    >
-                      <FaCheck />
-                    </button>
-                  </div>
-                )}
-              </Card>
-            );
-          }
-        })}
-      </div>
+      {isAdmin && (
+        <div>
+          <Title title="Requests waiting to approve" />
+          <div className="divider"></div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 pt-12">
+            {data.map((x) => {
+              if (x.requested) {
+                return (
+                  <Card url="associations" id={x.id} key={x.id}>
+                    <h3 className="card-title capitalize font-medium text-xl text-primary">
+                      {x.name}
+                    </h3>
+                    <h4 className="capitalize text-md text-secondary">
+                      {x.address}, <span className="font-medium">{x.town}</span>
+                    </h4>
+                    <p>{x.description}</p>
+                    {isAdmin && (
+                      <div className="flex gap-4">
+                        <button
+                          className="btn btn-error"
+                          onClick={() => handleDelete(x.id)}
+                        >
+                          <FaTrash />
+                        </button>
+                        <button
+                          className="btn btn-success"
+                          onClick={() => handleCheck(x.id)}
+                        >
+                          <FaCheck />
+                        </button>
+                      </div>
+                    )}
+                  </Card>
+                );
+              }
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

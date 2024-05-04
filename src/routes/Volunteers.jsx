@@ -7,6 +7,7 @@ import UserContext from "../context";
 
 function Volunteers() {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [form, setForm] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [filter, setFilter] = useState({});
@@ -16,6 +17,7 @@ function Volunteers() {
     setIsLoading(true);
     axios.get(`http://localhost:3001/volunteers`).then((response) => {
       setData(response.data);
+      setFilteredData(response.data);
       setIsLoading(false);
     });
   };
@@ -42,11 +44,19 @@ function Volunteers() {
   };
 
   const handleFilter = (e) => {
-    // e.preventDefault();
-    // const filteredData = data.filter((x) => {
-    //   return x.town === filter.town || x.association === filter.association;
-    // });
-    // setData(filteredData);
+    e.preventDefault();
+    const filteredData = data.filter((x) => {
+      if (filter.association && filter.town) {
+        return x.town === filter.town && x.association === filter.association;
+      }
+      if (filter.town) {
+        return x.town === filter.town;
+      }
+      if (filter.association) {
+        return x.association === filter.association;
+      }
+    });
+    setFilteredData(filteredData);
   };
 
   const removeFilters = () => {
@@ -63,7 +73,7 @@ function Volunteers() {
     <div>
       <Title title="Volunteers" />
       <div className="divider"></div>
-      <div className="flex justify-end items-center gap-4">
+      <div className="flex justify-end items-start gap-4">
         <CreateNew>
           <form
             className="flex flex-col gap-8 items-center"
@@ -141,11 +151,11 @@ function Volunteers() {
         </Filter>
       </div>
 
-      {data.length === 0 && (
+      {filteredData.length === 0 && (
         <p className="text-center">There are no volunteers...</p>
       )}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 pt-12">
-        {data.map((x) => {
+        {filteredData.map((x) => {
           return (
             <Card key={x.id}>
               <h3 className="card-title capitalize font-medium text-xl text-primary">
