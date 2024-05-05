@@ -9,22 +9,26 @@ import {
   DeleteModal,
 } from "../components";
 import axios from "axios";
+import UserContext from "../context";
 import { FaTrash } from "react-icons/fa";
 import { FiEdit3 } from "react-icons/fi";
-import UserContext from "../context";
 import { LuSave } from "react-icons/lu";
 import { MdCancel } from "react-icons/md";
 
 function Volunteers() {
+  const { isAdmin } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [form, setForm] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
   const [filter, setFilter] = useState({});
-  const { isAdmin } = useContext(UserContext);
-  const [cardToEdit, setCardToEdit] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [cardToEdit, setCardToEdit] = useState("");
   const [cardToDelete, setCardToDelete] = useState("");
+
+  useEffect(() => {
+    fetchVolunteers();
+  }, []);
 
   const fetchVolunteers = () => {
     setIsLoading(true);
@@ -34,10 +38,6 @@ function Volunteers() {
       setIsLoading(false);
     });
   };
-
-  useEffect(() => {
-    fetchVolunteers();
-  }, []);
 
   const handleCreateNew = (e) => {
     e.preventDefault();
@@ -58,11 +58,6 @@ function Volunteers() {
       });
   };
 
-  const openModal = (id) => {
-    setCardToDelete(id);
-    document.getElementById("my_modal_1").showModal();
-  };
-
   const handleFilter = (e) => {
     e.preventDefault();
     const filteredData = data.filter((x) => {
@@ -77,6 +72,11 @@ function Volunteers() {
       }
     });
     setFilteredData(filteredData);
+  };
+
+  const openModal = (id) => {
+    setCardToDelete(id);
+    document.getElementById("my_modal_1").showModal();
   };
 
   const removeFilters = () => {
@@ -137,13 +137,13 @@ function Volunteers() {
               required={true}
               setForm={setForm}
             />
-             <Input
-                type="text"
-                name="imageURL"
-                label="image URL"
-                setForm={setForm}
-                required={true}
-              />
+            <Input
+              type="text"
+              name="imageURL"
+              label="image URL"
+              setForm={setForm}
+              required={true}
+            />
 
             <Input
               type="text"
@@ -169,7 +169,13 @@ function Volunteers() {
             <Select
               label="Town"
               name="town"
-              options={["Springfield", "Oakville", "Meadowview"]}
+              options={[
+                "Springfield",
+                "Oakville",
+                "Meadowview",
+                "Cedarville",
+                "Riverside",
+              ]}
               setValue={(name, value) =>
                 setFilter((prev) => {
                   return { ...prev, [name]: value };
@@ -181,6 +187,8 @@ function Volunteers() {
               name="association"
               options={[
                 "Helping Hands Foundation",
+                "Community Arts Collective",
+                "Community Development Initiative",
                 "Green Earth Society",
                 "Community Action Coalition",
               ]}
@@ -204,80 +212,89 @@ function Volunteers() {
         <p className="text-center">There are no volunteers...</p>
       )}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 pt-12">
-        {filteredData.map((x) => {
+        {filteredData.map((volunteer) => {
+          const {
+            id,
+            name,
+            imageURL,
+            association,
+            email,
+            interests,
+            availability,
+            town,
+          } = volunteer;
           return (
-            <Card key={x.id} img={x.imageURL}>
-              {editMode && x.id === cardToEdit ? (
+            <Card key={id} img={imageURL}>
+              {editMode && id === cardToEdit ? (
                 <Input
                   type="text"
                   name="name"
                   label="name"
                   required={true}
-                  defaultValue={x.name}
+                  defaultValue={name}
                   setForm={setForm}
                 />
               ) : (
                 <h3 className="card-title capitalize font-medium text-xl text-primary">
-                  {x.name}
+                  {name}
                 </h3>
               )}
 
-              {editMode && x.id === cardToEdit ? (
+              {editMode && id === cardToEdit ? (
                 <Input
                   type="text"
                   name="association"
                   label="association"
                   required={true}
-                  defaultValue={x.association}
+                  defaultValue={association}
                   setForm={setForm}
                 />
               ) : (
                 <h4 className=" text-lg text-secondary font-bold">
-                  {x.association}
+                  {association}
                 </h4>
               )}
 
-              {editMode && x.id === cardToEdit ? (
+              {editMode && id === cardToEdit ? (
                 <Input
                   type="email"
                   name="email"
                   label="email"
                   required={true}
-                  defaultValue={x.email}
+                  defaultValue={email}
                   setForm={setForm}
                 />
               ) : (
-                <p className="text-md text-neutral">{x.email}</p>
+                <p className="text-md text-neutral">{email}</p>
               )}
 
-              {editMode && x.id === cardToEdit ? (
+              {editMode && id === cardToEdit ? (
                 <Input
                   type="text"
                   name="town"
                   label="town"
                   required={true}
-                  defaultValue={x.town}
+                  defaultValue={town}
                   setForm={setForm}
                 />
               ) : (
                 <p className="capitalize text-md text-neutral underline">
-                  {x.town}
+                  {town}
                 </p>
               )}
 
               <p className="font-bold">Interests</p>
 
-              {editMode && x.id === cardToEdit ? (
+              {editMode && id === cardToEdit ? (
                 <Input
                   type="text"
                   name="interests"
                   label="interests (use comma to seperate)"
-                  required={true}
-                  defaultValue={x.interests}
+                  defaultValue={interests}
                   setForm={setForm}
                 />
-              ) : x.interests ? (
-                x.interests.split(",").map((interest, index) => {
+              ) : interests ? (
+                interests.split(",").map((interest, index) => {
                   return <p key={index}>{interest}</p>;
                 })
               ) : (
@@ -286,29 +303,28 @@ function Volunteers() {
 
               <p className="font-bold">Availability</p>
 
-              {editMode && x.id === cardToEdit ? (
+              {editMode && id === cardToEdit ? (
                 <Input
                   type="text"
                   name="availability"
                   label="availability (use comma to seperate)"
-                  required={true}
-                  defaultValue={x.availability}
+                  defaultValue={availability}
                   setForm={setForm}
                 />
-              ) : x.availability ? (
-                x.availability.split(",").map((a, index) => {
-                  return <p key={index}>{a}</p>;
+              ) : availability ? (
+                availability.split(",").map((x, index) => {
+                  return <p key={index}>{x}</p>;
                 })
               ) : (
                 <p>None</p>
               )}
               {isAdmin &&
-                (editMode && x.id === cardToEdit ? (
+                (editMode && id === cardToEdit ? (
                   <div className="flex gap-4">
                     <button
                       title="Save"
                       className="btn btn-warning"
-                      onClick={() => handleSave(x.id)}
+                      onClick={() => handleSave(id)}
                     >
                       <LuSave />
                     </button>
@@ -325,14 +341,14 @@ function Volunteers() {
                     <button
                       title="Delete"
                       className="btn btn-error"
-                      onClick={() => openModal(x.id)}
+                      onClick={() => openModal(id)}
                     >
                       <FaTrash />
                     </button>
                     <button
                       title="Edit"
                       className="btn btn-warning"
-                      onClick={() => handleEdit(x.id)}
+                      onClick={() => handleEdit(id)}
                     >
                       <FiEdit3 />
                     </button>

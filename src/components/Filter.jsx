@@ -1,9 +1,8 @@
-import React from "react";
 import { IoFilterOutline } from "react-icons/io5";
 
 function Filter({ children }) {
   return (
-    <div className="grid drawer-end">
+    <div className="grid drawer-end z-10">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         <label htmlFor="my-drawer" className="btn btn-primary drawer-button">

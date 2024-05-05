@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   CreateNew,
   Input,
@@ -10,17 +10,20 @@ import {
   DateTimeInput,
 } from "../components";
 import axios from "axios";
-import { FaTrash } from "react-icons/fa";
-import { useContext } from "react";
 import UserContext from "../context";
+import { FaTrash } from "react-icons/fa";
 import { format } from "date-fns";
 
 function Activities() {
+  const { isAdmin } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const { isAdmin } = useContext(UserContext);
   const [cardToDelete, setCardToDelete] = useState("");
+
+  useEffect(() => {
+    fetchActivities();
+  }, []);
 
   const fetchActivities = () => {
     setIsLoading(true);
@@ -34,10 +37,6 @@ function Activities() {
         console.log(err);
       });
   };
-
-  useEffect(() => {
-    fetchActivities();
-  }, []);
 
   function truncateText(text, maxLength) {
     if (text.length > maxLength) {
@@ -84,15 +83,15 @@ function Activities() {
   const handleCreateNew = (e) => {
     setIsLoading(true);
     e.preventDefault();
-    axios.post(`http://localhost:3001/activities`, form).then(() => {
-      console.log("created");
-      fetchActivities();
-    });
-  };
-
-  const openModal = (id) => {
-    setCardToDelete(id);
-    document.getElementById("my_modal_1").showModal();
+    axios
+      .post(`http://localhost:3001/activities`, form)
+      .then(() => {
+        console.log("created");
+        fetchActivities();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleDelete = () => {
@@ -102,7 +101,15 @@ function Activities() {
       .then(() => {
         console.log("deleted");
         fetchActivities();
+      })
+      .catch((err) => {
+        console.log(err);
       });
+  };
+
+  const openModal = (id) => {
+    setCardToDelete(id);
+    document.getElementById("my_modal_1").showModal();
   };
 
   if (isLoading) {
@@ -182,24 +189,25 @@ function Activities() {
           <p className="text-center">There are no activities...</p>
         )}
         {data &&
-          data.map((x) => {
+          data.map((activity) => {
+            const { id, name, imageURL, description, date } = activity;
             return (
-              <div className="relative" key={x.id}>
+              <div className="relative" key={id}>
                 <List
                   url="activities"
-                  id={x.id}
+                  id={id}
                   className="relative"
-                  img={x.imageURL}
+                  img={imageURL}
                 >
                   <div className="ml-0 sm:ml-16">
                     <h3 className="card-title capitalize font-medium text-xl mb-12">
-                      {x.name}
+                      {name}
                     </h3>
                     <h4 className=" text-md text-neutral-content">
-                      {truncateText(x.description, 150)}
+                      {truncateText(description, 150)}
                     </h4>
                     <p className="text-secondary font-medium sm:ml-auto mt-4">
-                      {format(new Date(x.date), "yyyy-MM-dd h:mm a")}
+                      {format(new Date(date), "yyyy-MM-dd h:mm a")}
                     </p>
                   </div>
                 </List>
@@ -207,7 +215,7 @@ function Activities() {
                   <button
                     title="Delete"
                     className="btn btn-error absolute bottom-5 right-32"
-                    onClick={() => openModal(x.id)}
+                    onClick={() => openModal(id)}
                   >
                     <FaTrash />
                   </button>

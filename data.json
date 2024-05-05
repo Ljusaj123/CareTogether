@@ -47,6 +47,54 @@
       "town": "Riverside",
       "description": "The Children's Education Initiative focuses on improving educational opportunities and outcomes for children in the community through tutoring programs, after-school activities, and advocacy efforts.",
       "id": "97e0"
+    },
+    {
+      "name": "Environmental Protection Alliance",
+      "imageURL": "https://assets-global.website-files.com/63137046087f3d1f34884eb8/63137046087f3dda51884eea_epa-header-logo-blk-1.png",
+      "address": "789 Redwood Avenue",
+      "town": "Bayside",
+      "description": "The Environmental Protection Alliance is committed to preserving and protecting the environment through initiatives such as habitat restoration, pollution reduction, and environmental education.",
+      "id": "2b34"
+    },
+    {
+      "name": "Humanitarian Relief Foundation",
+      "imageURL": "https://www.totalgiving.co.uk/dm-images/charity-logos/large/global-humanitarian-relief-foundation-ghrf.jpg",
+      "address": "234 Elmwood Street",
+      "town": "Lakeside",
+      "description": "The Humanitarian Relief Foundation provides aid and support to communities affected by natural disasters, conflicts, and other humanitarian crises, including emergency relief, shelter, and medical assistance.",
+      "id": "3c45"
+    },
+    {
+      "name": "Youth Empowerment Network",
+      "imageURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXtAxyQ9hKyRHVhSCBSZ-Dmt-0bm_VrLyZ2GSwl0PPMg&s",
+      "address": "789 Pinecrest Avenue",
+      "town": "Toronto",
+      "description": "The Youth Empowerment Network empowers young people to reach their full potential through mentorship programs, leadership development, and opportunities for civic engagement and personal growth.",
+      "id": "6f78"
+    },
+    {
+      "name": "Healthcare Access Initiative",
+      "imageURL": "https://static1.squarespace.com/static/5a571c9d692ebe9bf6313d0f/t/5a5a2335e2c4839a6b1f0ba0/1518545109202/New+GHAI+Logo+1.png?format=1500w",
+      "address": "890 Birchwood Drive",
+      "town": "Greenfield",
+      "description": "The Healthcare Access Initiative works to improve access to healthcare services for underserved communities through advocacy, education, and outreach programs focused on preventive care and wellness.",
+      "id": "7g89"
+    },
+    {
+      "name": "Cultural Diversity Coalition",
+      "imageURL": "https://ficdc.org/wp-content/uploads/2019/02/ukccd-555x320.png",
+      "address": "901 Elmwood Avenue",
+      "town": "Harmony",
+      "description": "The Cultural Diversity Coalition promotes understanding and appreciation of diverse cultures through cultural events, workshops, and initiatives that celebrate the richness of cultural heritage within the community.",
+      "id": "8h90"
+    },
+    {
+      "name": "Artistic Expression Society",
+      "imageURL": "https://www.velcu.fi/wp-content/uploads/2020/09/identity-1815811_1920-845x321.jpg",
+      "address": "234 Pinecrest Street",
+      "town": "Lakeview",
+      "description": "The Artistic Expression Society promotes creativity and artistic expression within the community through art workshops, exhibitions, and collaborative projects that inspire and engage individuals of all ages.",
+      "id": "0j12"
     }
   ],
   "activities": [
@@ -117,6 +165,104 @@
       ],
       "organization": "Nature Preservation Society",
       "location": "987 Cedar Avenue, Riverside"
+    },
+    {
+      "id": "6",
+      "name": "Beach Cleanup",
+      "imageURL": "https://saveourseas.com/sosf-shark-education-centre/wp-content/uploads/sites/3/20220411-image01danelwentzel-copyright.jpg",
+      "date": "2024-05-14T09:00:00.000Z",
+      "description": "Join us for a beach cleanup event where we'll work together to remove litter and debris from our coastline. By keeping our beaches clean, we can protect marine life, preserve natural habitats, and ensure that everyone can enjoy our beautiful shores. Bring your friends and family for a fun and rewarding day of environmental stewardship!",
+      "applicants": [
+        "Ethan Thompson",
+        "Olivia White",
+        "Noah Rodriguez"
+      ],
+      "organization": "Ocean Conservation Alliance",
+      "location": "123 Oceanfront Drive, Seaside"
+    },
+    {
+      "id": "7",
+      "name": "Community Garden Planting",
+      "imageURL": "https://nj.cooperatornews.com/_data/nj/articles/9328_image1.jpg?w=793",
+      "date": "2024-05-15T10:00:00.000Z",
+      "description": "Help us plant a community garden that will provide fresh produce for local residents and promote sustainable living practices. Whether you're a seasoned gardener or new to gardening, there's a place for you in our garden. Together, we'll cultivate a vibrant and thriving green space that strengthens community connections and enhances food security.",
+      "applicants": [
+        "Emma Johnson",
+        "Alexander Martinez",
+        "Mia Garcia"
+      ],
+      "organization": "Green Thumb Society",
+      "location": "456 Garden Street, Meadowview"
+    },
+    {
+      "id": "8",
+      "name": "Homeless Shelter Volunteer",
+      "imageURL": "https://www.london.gov.uk/what-we-do/volunteering/search/sites/default/files/styles/content_image_medium/public/opportunity-images/1%20%288%29_0.jpg?itok=4keDWl7b",
+      "date": "2024-05-16T11:00:00.000Z",
+      "description": "Join us in supporting individuals experiencing homelessness by volunteering at our local shelter. From preparing meals to organizing donations, your assistance will make a meaningful difference in the lives of those in need. Together, we can provide warmth, comfort, and hope to our neighbors facing housing insecurity.",
+      "applicants": [
+        "Sophia Johnson",
+        "Michael Martinez",
+        "Isabella Brown"
+      ],
+      "organization": "Home Hope Haven",
+      "location": "789 Shelter Lane, Riverside"
+    },
+    {
+      "id": "9",
+      "name": "Youth Mentorship Program",
+      "imageURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrkUrwzQauwRdB4XcFoIgI9R0PvcXanysInlDLSMBXFg&s",
+      "date": "2024-05-17T14:00:00.000Z",
+      "description": "Become a mentor and inspire the next generation by joining our youth mentorship program. Through one-on-one mentoring, group activities, and skill-building workshops, you'll empower young people to reach their full potential and achieve their goals. Make a lasting impact in the lives of youth and help shape the leaders of tomorrow.",
+      "applicants": [
+        "Daniel Garcia",
+        "Ava Taylor",
+        "William Lee"
+      ],
+      "organization": "Future Leaders Foundation",
+      "location": "555 Mentorship Avenue, Oakville"
+    },
+    {
+      "id": "10",
+      "name": "Community Cleanup Day",
+      "imageURL": "https://frenchtownboro.com/wp-content/uploads/2018/10/community-clean-up-2017.jpg",
+      "date": "2024-05-18T09:00:00.000Z",
+      "description": "Join us for a community cleanup day where we'll work together to beautify our neighborhoods and public spaces. From picking up litter to landscaping projects, there's something for everyone to contribute. Let's come together to make our community cleaner, greener, and more vibrant for all who live here.",
+      "applicants": [
+        "Ethan Garcia",
+        "Olivia Thompson",
+        "Noah Martinez"
+      ],
+      "organization": "Clean Community Coalition",
+      "location": "123 Main Street, Maple Lane"
+    },
+    {
+      "id": "11",
+      "name": "Food Drive",
+      "imageURL": "https://cf.ltkcdn.net/charity/images/orig/254503-1600x1030-how-organize-food-drive.jpg",
+      "date": "2024-05-19T10:00:00.000Z",
+      "description": "Help us fight hunger in our community by participating in our food drive. Donate non-perishable food items or volunteer to collect donations from local businesses and residents. Together, we can ensure that everyone has access to nutritious meals and support those facing food insecurity.",
+      "applicants": [
+        "Emma Garcia",
+        "Alexander Thompson",
+        "Mia Wilson"
+      ],
+      "organization": "Food for All Initiative",
+      "location": "789 Food Bank Drive, Cedarville"
+    },
+    {
+      "id": "13",
+      "name": "Community Library Cleanup",
+      "imageURL": "https://bloximages.chicago2.vip.townnews.com/cullmantimes.com/content/tncms/assets/v3/editorial/d/54/d5403c8c-3c5e-11ee-b995-03576c2f1e88/64dd0ed1b5980.image.jpg?resize=667%2C500",
+      "date": "2024-05-21T12:00:00.000Z",
+      "description": "Join us for a cleanup day at the community library and help maintain this valuable resource for our neighborhood. From organizing shelves to dusting books, your efforts will ensure that the library remains a welcoming and accessible space for all members of the community. Together, we can preserve and enhance this important community asset.",
+      "applicants": [
+        "Sophia Thompson",
+        "Michael Lee",
+        "Isabella Rodriguez"
+      ],
+      "organization": "Library Preservation Society",
+      "location": "555 Library Lane, Meadowview"
     }
   ],
   "volunteers": [
@@ -169,6 +315,76 @@
       "town": "Riverside",
       "interests": "Education, Child development",
       "availability": "Weekends, Evenings"
+    },
+    {
+      "id": "7",
+      "name": "Olivia Johnson",
+      "imageURL": "https://xsgames.co/randomusers/assets/avatars/female/12.jpg",
+      "email": "olivia@example.com",
+      "association": "Healthcare Support Group",
+      "town": "Springfield",
+      "interests": "Healthcare, Wellness",
+      "availability": "Weekdays, Evenings"
+    },
+    {
+      "id": "9",
+      "name": "Ava Garcia",
+      "imageURL": "https://xsgames.co/randomusers/assets/avatars/female/34.jpg",
+      "email": "ava@example.com",
+      "association": "Community Arts Collective",
+      "town": "Cedarville",
+      "interests": "Art, Cultural events",
+      "availability": "Weekdays, Afternoons"
+    },
+    {
+      "id": "10",
+      "name": "William Rodriguez",
+      "imageURL": "https://xsgames.co/randomusers/assets/avatars/male/45.jpg",
+      "email": "william@example.com",
+      "association": "Sports and Recreation Club",
+      "town": "Maple Lane",
+      "interests": "Sports, Fitness",
+      "availability": "Weekends, Mornings"
+    },
+    {
+      "id": "12",
+      "name": "Alexander Brown",
+      "imageURL": "https://xsgames.co/randomusers/assets/avatars/male/24.jpg",
+      "email": "alexander@example.com",
+      "association": "Tech and Innovation Forum",
+      "town": "Oakville",
+      "interests": "Technology, Innovation",
+      "availability": "Weekdays, Mornings"
+    },
+    {
+      "id": "13",
+      "name": "Isabella Martinez",
+      "imageURL": "https://xsgames.co/randomusers/assets/avatars/female/67.jpg",
+      "email": "isabella@example.com",
+      "association": "Animal Rights Advocacy",
+      "town": "Cedarville",
+      "interests": "Animal welfare, Activism",
+      "availability": "Weekends, Afternoons"
+    },
+    {
+      "id": "14",
+      "name": "Ethan Thomas",
+      "imageURL": "https://xsgames.co/randomusers/assets/avatars/male/56.jpg",
+      "email": "ethan@example.com",
+      "association": "Community Development Initiative",
+      "town": "Springfield",
+      "interests": "Community building, Social entrepreneurship",
+      "availability": "Weekdays, Evenings"
+    },
+    {
+      "id": "15",
+      "name": "Mia Taylor",
+      "imageURL": "https://xsgames.co/randomusers/assets/avatars/female/78.jpg",
+      "email": "mia@example.com",
+      "association": "Literacy and Education Foundation",
+      "town": "Meadowview",
+      "interests": "Literacy, Education equity",
+      "availability": "Weekends"
     }
   ]
 }

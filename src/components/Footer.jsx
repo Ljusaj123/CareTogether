@@ -1,4 +1,3 @@
-import React from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { links } from "./NavLinks";
 import { NavLink } from "react-router-dom";

@@ -1,29 +1,34 @@
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 import axios from "axios";
+import UserContext from "../context";
 import { Input, DeleteModal } from "../components";
 import { FaTrash } from "react-icons/fa6";
-import { useContext } from "react";
-import UserContext from "../context";
 
 function SingleActivity() {
   const { id } = useParams();
-  const [activity, setActivity] = useState([]);
-  const [form, setForm] = useState({});
   const { isAdmin } = useContext(UserContext);
+  const [activity, setActivity] = useState([]);
   const [applicantToDelete, setApplicantToDelete] = useState("");
-
-  const fetchActivities = async () => {
-    axios.get(`http://localhost:3001/activities/${id}`).then((response) => {
-      setActivity(response.data);
-    });
-  };
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchActivities();
   }, []);
 
+  const fetchActivities = () => {
+    setIsLoading(true);
+    axios
+      .get(`http://localhost:3001/activities/${id}`)
+      .then((response) => {
+        setActivity(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
+  };
+
   const handleSubmit = (e, applicants) => {
+    setIsLoading(true);
     e.preventDefault();
     applicants.push(e.target.name.value + " " + e.target.surname.value);
     axios
@@ -31,10 +36,12 @@ function SingleActivity() {
       .then(() => {
         console.log("applied");
         fetchActivities();
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleDelete = () => {
+    setIsLoading(true);
     const filteredApplicants = applicants.filter((x) => {
       return x !== applicantToDelete;
     });
@@ -46,7 +53,8 @@ function SingleActivity() {
       .then(() => {
         console.log("deleted");
         fetchActivities();
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   const openModal = (applicant) => {
@@ -63,6 +71,11 @@ function SingleActivity() {
     location,
     imageURL,
   } = activity;
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div className="grid md:grid-cols-2 gap-24 items-start">
       <div className="max-w-96">
@@ -89,8 +102,8 @@ function SingleActivity() {
           className="flex flex-col gap-4"
           onSubmit={(e) => handleSubmit(e, applicants)}
         >
-          <Input type="text" name="name" label="name" setForm={setForm} />
-          <Input type="text" name="surname" label="surname" setForm={setForm} />
+          <Input type="text" name="name" label="name" />
+          <Input type="text" name="surname" label="surname" />
           <button type="submit" className="btn btn-primary max-w-24 my-4">
             Apply
           </button>

@@ -1,5 +1,3 @@
-import React from "react";
-
 function Textarea({ label, name, required, setForm }) {
   const handleInput = (e) => {
     const { name, value } = e.target;

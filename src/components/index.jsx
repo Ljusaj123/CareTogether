@@ -4,13 +4,13 @@ import Hero from "./Hero";
 import Card from "./Card";
 import CreateNew from "./CreateNew";
 import Filter from "./Filter";
-import Input from "./Input";
+import Input from "./form/Input";
 import List from "./List";
-import Select from "./Select";
+import Select from "./form/Select";
 import Title from "./Title";
 import DeleteModal from "./DeleteModal";
-import Textarea from "./Textarea";
-import DateTimeInput from "./DateTimeInput";
+import Textarea from "./form/Textarea";
+import DateTimeInput from "./form/DateTimeInput";
 
 export {
   Header,

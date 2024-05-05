@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { CreateNew, Input, DeleteModal, Title, Card } from "../components";
 import axios from "axios";
-import { FaTrash } from "react-icons/fa";
-import { useContext } from "react";
+import { FaTrash, FaCheck } from "react-icons/fa";
 import UserContext from "../context";
-import { FaCheck } from "react-icons/fa";
 
 function Associations() {
+  const { isAdmin } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const { isAdmin } = useContext(UserContext);
   const [cardToDelete, setCardToDelete] = useState("");
+
+  useEffect(() => {
+    fetchAssociations();
+  }, []);
 
   const fetchAssociations = async () => {
     setIsLoading(true);
@@ -20,10 +22,6 @@ function Associations() {
       setIsLoading(false);
     });
   };
-
-  useEffect(() => {
-    fetchAssociations();
-  }, []);
 
   const handleDelete = () => {
     setIsLoading(true);
@@ -36,6 +34,7 @@ function Associations() {
   };
 
   const handleCheck = (id) => {
+    setIsLoading(true);
     axios
       .patch(`http://localhost:3001/associations/${id}`, { requested: false })
       .then(() => {
@@ -121,22 +120,25 @@ function Associations() {
       )}
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 pt-12 mb-24">
-        {data.map((x) => {
-          if (!x.requested) {
+        {data.map((association) => {
+          const { requested, id, name, imageURL, address, description, town } =
+            association;
+
+          if (!requested) {
             return (
-              <Card url="associations" id={x.id} key={x.id} img={x.imageURL}>
+              <Card url="associations" id={id} key={id} img={imageURL}>
                 <h3 className="card-title capitalize font-medium text-xl text-primary">
-                  {x.name}
+                  {name}
                 </h3>
                 <h4 className="capitalize text-md text-secondary">
-                  {x.address}, <span className="font-medium">{x.town}</span>
+                  {address}, <span className="font-medium">{town}</span>
                 </h4>
-                <p>{x.description}</p>
+                <p>{description}</p>
                 {isAdmin && (
                   <button
                     title="Delete"
                     className="btn btn-error"
-                    onClick={() => openModal(x.id)}
+                    onClick={() => openModal(id)}
                   >
                     <FaTrash />
                   </button>
@@ -152,35 +154,39 @@ function Associations() {
           <Title title="Requests waiting to approve" />
           <div className="divider"></div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 pt-12">
-            {data.map((x) => {
-              if (x.requested) {
+            {data.map((association) => {
+              const {
+                requested,
+                id,
+                name,
+                imageURL,
+                address,
+                description,
+                town,
+              } = association;
+              if (requested) {
                 return (
-                  <Card
-                    url="associations"
-                    id={x.id}
-                    key={x.id}
-                    img={x.imageURL}
-                  >
+                  <Card url="associations" id={id} key={id} img={imageURL}>
                     <h3 className="card-title capitalize font-medium text-xl text-primary">
-                      {x.name}
+                      {name}
                     </h3>
                     <h4 className="capitalize text-md text-secondary">
-                      {x.address}, <span className="font-medium">{x.town}</span>
+                      {address}, <span className="font-medium">{town}</span>
                     </h4>
-                    <p>{x.description}</p>
+                    <p>{description}</p>
                     {isAdmin && (
                       <div className="flex gap-4">
                         <button
                           title="Approve"
                           className="btn btn-success"
-                          onClick={() => handleCheck(x.id)}
+                          onClick={() => handleCheck(id)}
                         >
                           <FaCheck />
                         </button>
                         <button
                           title="Delete"
                           className="btn btn-error"
-                          onClick={() => openModal(x.id)}
+                          onClick={() => openModal(id)}
                         >
                           <FaTrash />
                         </button>
