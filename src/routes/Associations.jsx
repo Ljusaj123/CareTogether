@@ -97,6 +97,13 @@ function Associations() {
             />
             <Input
               type="text"
+              name="imageURL"
+              label="image URL"
+              setForm={setForm}
+              required={true}
+            />
+            <Input
+              type="text"
               name="description"
               label="description"
               setForm={setForm}
@@ -117,7 +124,7 @@ function Associations() {
         {data.map((x) => {
           if (!x.requested) {
             return (
-              <Card url="associations" id={x.id} key={x.id}>
+              <Card url="associations" id={x.id} key={x.id} img={x.imageURL}>
                 <h3 className="card-title capitalize font-medium text-xl text-primary">
                   {x.name}
                 </h3>
@@ -148,7 +155,12 @@ function Associations() {
             {data.map((x) => {
               if (x.requested) {
                 return (
-                  <Card url="associations" id={x.id} key={x.id}>
+                  <Card
+                    url="associations"
+                    id={x.id}
+                    key={x.id}
+                    img={x.imageURL}
+                  >
                     <h3 className="card-title capitalize font-medium text-xl text-primary">
                       {x.name}
                     </h3>
@@ -159,16 +171,18 @@ function Associations() {
                     {isAdmin && (
                       <div className="flex gap-4">
                         <button
-                          className="btn btn-error"
-                          onClick={() => openModal(x.id)}
-                        >
-                          <FaTrash />
-                        </button>
-                        <button
+                          title="Approve"
                           className="btn btn-success"
                           onClick={() => handleCheck(x.id)}
                         >
                           <FaCheck />
+                        </button>
+                        <button
+                          title="Delete"
+                          className="btn btn-error"
+                          onClick={() => openModal(x.id)}
+                        >
+                          <FaTrash />
                         </button>
                       </div>
                     )}

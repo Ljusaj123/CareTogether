@@ -1,9 +1,7 @@
 import React from "react";
-import img from "../assets/img.jpg";
 import { Link } from "react-router-dom";
-import { FaTrash } from "react-icons/fa";
 
-function List({ url, id, children }) {
+function List({ url, id, children, img }) {
   return (
     <Link
       to={`/${url}/${id}`}

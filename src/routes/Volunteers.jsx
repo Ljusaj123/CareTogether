@@ -137,6 +137,13 @@ function Volunteers() {
               required={true}
               setForm={setForm}
             />
+             <Input
+                type="text"
+                name="imageURL"
+                label="image URL"
+                setForm={setForm}
+                required={true}
+              />
 
             <Input
               type="text"
@@ -196,10 +203,10 @@ function Volunteers() {
       {filteredData.length === 0 && (
         <p className="text-center">There are no volunteers...</p>
       )}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 pt-12">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 pt-12">
         {filteredData.map((x) => {
           return (
-            <Card key={x.id}>
+            <Card key={x.id} img={x.imageURL}>
               {editMode && x.id === cardToEdit ? (
                 <Input
                   type="text"

@@ -148,6 +148,14 @@ function Activities() {
                 required={true}
               />
 
+              <Input
+                type="text"
+                name="imageURL"
+                label="image URL"
+                setForm={setForm}
+                required={true}
+              />
+
               <Textarea
                 label="description"
                 name="description"
@@ -177,7 +185,12 @@ function Activities() {
           data.map((x) => {
             return (
               <div className="relative" key={x.id}>
-                <List url="activities" id={x.id} className="relative">
+                <List
+                  url="activities"
+                  id={x.id}
+                  className="relative"
+                  img={x.imageURL}
+                >
                   <div className="ml-0 sm:ml-16">
                     <h3 className="card-title capitalize font-medium text-xl mb-12">
                       {x.name}

@@ -54,39 +54,47 @@ function SingleActivity() {
     document.getElementById("my_modal_1").showModal();
   };
 
-  const { name, date, description, organization, applicants, location } =
-    activity;
+  const {
+    name,
+    date,
+    description,
+    organization,
+    applicants,
+    location,
+    imageURL,
+  } = activity;
   return (
-    <div>
-      <div className="flex justify-between mb-24">
-        <div className="max-w-96">
-          <h1 className="text-3xl font-bold text-primary my-8">{name}</h1>
-          <h2 className="text-2xl text-secondary my-4">
-            Organized by: {organization}
-          </h2>
-          <p className="text-lg">{description}</p>
-          <p className="text-xl my-4 text-info">When: {date}</p>
-          <p className="text-xl text-info">Where: {location}</p>
-        </div>
+    <div className="grid md:grid-cols-2 gap-24 items-start">
+      <div className="max-w-96">
+        <h1 className="text-3xl font-bold text-primary mb-4">{name}</h1>
+        <h2 className="text-2xl text-secondary my-4">
+          Organized by: {organization}
+        </h2>
+        <p className="text-lg">{description}</p>
+        <p className="text-xl my-4 text-info">When: {date}</p>
+        <p className="text-xl text-info">Where: {location}</p>
+      </div>
 
-        <div className="px-24">
-          <h2 className="text-2xl text-primary my-8">Form to apply</h2>
-          <form
-            className="flex flex-col gap-4"
-            onSubmit={(e) => handleSubmit(e, applicants)}
-          >
-            <Input type="text" name="name" label="name" setForm={setForm} />
-            <Input
-              type="text"
-              name="surname"
-              label="surname"
-              setForm={setForm}
-            />
-            <button type="submit" className="btn btn-primary my-8">
-              Apply
-            </button>
-          </form>
-        </div>
+      <figure>
+        <img
+          src={imageURL}
+          alt="img"
+          className="rounded-lg w-full object-cover min-w-40"
+        />
+      </figure>
+
+      <div>
+        <h2 className="text-2xl text-primary my-4">Form to apply</h2>
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={(e) => handleSubmit(e, applicants)}
+        >
+          <Input type="text" name="name" label="name" setForm={setForm} />
+          <Input type="text" name="surname" label="surname" setForm={setForm} />
+          <button type="submit" className="btn btn-primary max-w-24 my-4">
+            Apply
+          </button>
+        </form>
       </div>
 
       <div>
