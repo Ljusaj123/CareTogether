@@ -6,20 +6,19 @@ import {
   List,
   Select,
   DeleteModal,
+  Textarea,
+  DateTimeInput,
 } from "../components";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 import { useContext } from "react";
 import UserContext from "../context";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 
 function Activities() {
   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const { isAdmin } = useContext(UserContext);
   const [cardToDelete, setCardToDelete] = useState("");
 
@@ -39,13 +38,6 @@ function Activities() {
   useEffect(() => {
     fetchActivities();
   }, []);
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-    setForm((prev) => {
-      return { ...prev, date: new Date(date).toISOString() };
-    });
-  };
 
   function truncateText(text, maxLength) {
     if (text.length > maxLength) {
@@ -135,20 +127,11 @@ function Activities() {
                 setForm={setForm}
                 required={true}
               />
-
-              <label className="form-control w-full max-w-xs">
-                <div className="label capitalize">
-                  <span className="label-text">Date and Time</span>
-                </div>
-                <DatePicker
-                  className="px-4 py-3 w-full border border-primary rounded-lg"
-                  selected={selectedDate}
-                  onChange={handleDateChange}
-                  dateFormat="yyyy-MM-dd HH:mm"
-                  showTimeInput
-                  required
-                />
-              </label>
+              <DateTimeInput
+                label="Date and Time"
+                required={true}
+                setForm={setForm}
+              />
 
               <Input
                 type="text"
@@ -165,22 +148,13 @@ function Activities() {
                 required={true}
               />
 
-              <label className="form-control w-full max-w-xs">
-                <div className="label capitalize">
-                  <span className="label-text">
-                    <span className="text-error">* </span>Description
-                  </span>
-                </div>
-                <textarea
-                  id="description"
-                  name="description"
-                  className="textarea textarea-primary w-full"
-                  required
-                  onChange={(e) =>
-                    setForm({ ...form, [e.target.name]: e.target.value })
-                  }
-                ></textarea>
-              </label>
+              <Textarea
+                label="description"
+                name="description"
+                setForm={setForm}
+                required={true}
+              />
+
               <button type="submit" className="btn btn-primary">
                 Create
               </button>

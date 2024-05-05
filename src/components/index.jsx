@@ -9,6 +9,8 @@ import List from "./List";
 import Select from "./Select";
 import Title from "./Title";
 import DeleteModal from "./DeleteModal";
+import Textarea from "./Textarea";
+import DateTimeInput from './DateTimeInput'
 
 export {
   Header,
@@ -22,4 +24,6 @@ export {
   Title,
   List,
   DeleteModal,
+  Textarea,
+  DateTimeInput
 };
