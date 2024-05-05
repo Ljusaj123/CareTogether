@@ -66,8 +66,7 @@
       "applicants": [
         "Sarah Brown",
         "Michael Chang",
-        "Emily Wilson",
-        "Rosan dfsf"
+        "Emily Wilson"
       ],
       "organization": "Green Earth Society",
       "location": "456 Elm Avenue, Oakville"
@@ -80,9 +79,7 @@
       "applicants": [
         "David Wilson",
         "Sophia Lee",
-        "Robert Johnson",
-        "Rosana Ljušaj",
-        "ana asdfsgd"
+        "Robert Johnson"
       ],
       "organization": "Community Cares Foundation",
       "location": "789 Pine Road, Meadowview",
@@ -122,14 +119,8 @@
       "email": "alice@example.com",
       "association": "Community Action Coalition",
       "town": "Springfield",
-      "interests": [
-        "Community service",
-        "Environmental activism"
-      ],
-      "availability": [
-        "Weekends",
-        "Evenings"
-      ]
+      "interests": "Community service, Environmental activism",
+      "availability": "Weekends, Evenings"
     },
     {
       "id": "2",
@@ -137,14 +128,8 @@
       "email": "david@example.com",
       "association": "Green Earth Society",
       "town": "Oakville",
-      "interests": [
-        "Sustainability",
-        "Outdoor activities"
-      ],
-      "availability": [
-        "Weekdays",
-        "Mornings"
-      ]
+      "interests": "Sustainability, Outdoor activities",
+      "availability": "Weekdays, Mornings"
     },
     {
       "id": "3",
@@ -152,13 +137,8 @@
       "email": "emily@example.com",
       "association": "Helping Hands Foundation",
       "town": "Meadowview",
-      "interests": [
-        "Humanitarian aid",
-        "Social justice"
-      ],
-      "availability": [
-        "Weekends"
-      ]
+      "interests": "Humanitarian aid, Social justice",
+      "availability": "Weekends"
     },
     {
       "id": "4",
@@ -166,14 +146,8 @@
       "email": "michael@example.com",
       "association": "Animal Welfare League",
       "town": "Cedarville",
-      "interests": [
-        "Animal welfare",
-        "Veterinary science"
-      ],
-      "availability": [
-        "Weekends",
-        "Evenings"
-      ]
+      "interests": "Animal welfare,Veterinary science",
+      "availability": "Weekends, Evenings"
     },
     {
       "id": "5",
@@ -181,14 +155,8 @@
       "email": "sophia@example.com",
       "association": "Senior Support Center",
       "town": "Maple Lane",
-      "interests": [
-        "Elderly care",
-        "Community support"
-      ],
-      "availability": [
-        "Weekdays",
-        "Afternoons"
-      ]
+      "interests": "Elderly care, Community support",
+      "availability": "Weekdays, Afternoons"
     },
     {
       "id": "6",
@@ -196,14 +164,8 @@
       "email": "james@example.com",
       "association": "Children's Education Initiative",
       "town": "Riverside",
-      "interests": [
-        "Education",
-        "Child development"
-      ],
-      "availability": [
-        "Weekends",
-        "Evenings"
-      ]
+      "interests": "Education, Child development",
+      "availability": "Weekends, Evenings"
     }
   ]
 }

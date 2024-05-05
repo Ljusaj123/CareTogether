@@ -185,13 +185,8 @@ function Activities() {
         {data &&
           data.map((x, index) => {
             return (
-              <div className="relative">
-                <List
-                  url="activities"
-                  id={x.id}
-                  key={index}
-                  className="relative"
-                >
+              <div className="relative" key={x.id}>
+                <List url="activities" id={x.id} className="relative">
                   <div className="ml-0 sm:ml-16">
                     <h3 className="card-title capitalize font-medium text-xl mb-12">
                       {x.name}
@@ -205,8 +200,11 @@ function Activities() {
                   </div>
                 </List>
                 {isAdmin && (
-                  <button className="btn btn-error absolute bottom-5 right-32">
-                    <FaTrash onClick={(event) => handleDelete(event, x.id)} />
+                  <button
+                    className="btn btn-error absolute bottom-5 right-32"
+                    onClick={(event) => handleDelete(event, x.id)}
+                  >
+                    <FaTrash />
                   </button>
                 )}
               </div>

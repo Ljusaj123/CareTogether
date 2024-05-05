@@ -107,8 +107,20 @@ function Volunteers() {
               required={true}
               setForm={setForm}
             />
-            {/* // interests */}
-            {/* availability */}
+
+            <Input
+              type="text"
+              name="interests"
+              label="interests"
+              setForm={setForm}
+            />
+
+            <Input
+              type="text"
+              name="availability"
+              label="availability"
+              setForm={setForm}
+            />
 
             <button type="submit" className="btn btn-primary">
               Create
@@ -165,22 +177,27 @@ function Volunteers() {
                 {x.association}
               </p>
               <h4 className="text-md text-neutral">{x.email}</h4>
-              <h4 className="capitalize text-md text-neutral">{x.town}</h4>
-              <p>
-                Interests:
-                {x.interests &&
-                  x.interests.map((interest, index) => {
-                    return <span key={index}>{interest}</span>;
-                  })}
-              </p>
+              <h4 className="capitalize text-md text-neutral underline">
+                {x.town}
+              </h4>
+              <p className="font-bold">Interests</p>
 
-              <p>
-                Availability:{" "}
-                {x.availability &&
-                  x.availability.map((a, index) => {
-                    return <span key={index}>{a}</span>;
-                  })}
-              </p>
+              {x.interests ? (
+                x.interests.split(",").map((interest, index) => {
+                  return <p key={index}>{interest}</p>;
+                })
+              ) : (
+                <p>None</p>
+              )}
+
+              <p className="font-bold">Availability</p>
+              {x.availability ? (
+                x.availability.split(",").map((a, index) => {
+                  return <p key={index}>{a}</p>;
+                })
+              ) : (
+                <p>None</p>
+              )}
               {isAdmin && (
                 <div className="flex gap-4">
                   <button

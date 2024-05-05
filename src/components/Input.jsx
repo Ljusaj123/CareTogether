@@ -10,7 +10,11 @@ function Input({ type, name, label, placeholderText, setForm, required }) {
   return (
     <label className="form-control w-full max-w-xs">
       <div className="label capitalize">
-        <span className="label-text">{label}</span>
+        <span className="label-text">
+          {required && <span className="text-error">* </span>}
+
+          {label}
+        </span>
       </div>
       <input
         onChange={(e) => handleInput(e)}

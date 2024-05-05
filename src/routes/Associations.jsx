@@ -32,12 +32,13 @@ function Associations() {
     });
   };
 
-  const handleCheck = (e, id) => {
-    e.preventDefault();
-    // axios.patch(`http://localhost:3001/associations/${id}`).then(() => {
-    //   console.log("applied");
-    //   fetchAssociations();
-    // });
+  const handleCheck = (id) => {
+    axios
+      .patch(`http://localhost:3001/associations/${id}`, { requested: false })
+      .then(() => {
+        console.log("applied");
+        fetchAssociations();
+      });
   };
 
   const handleCreateNew = (e) => {
