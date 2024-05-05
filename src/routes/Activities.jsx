@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { CreateNew, Input, Title, List, Select } from "../components";
+import {
+  CreateNew,
+  Input,
+  Title,
+  List,
+  Select,
+  DeleteModal,
+} from "../components";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 import { useContext } from "react";
@@ -14,6 +21,7 @@ function Activities() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { isAdmin } = useContext(UserContext);
+  const [cardToDelete, setCardToDelete] = useState("");
 
   const fetchActivities = () => {
     setIsLoading(true);
@@ -90,12 +98,19 @@ function Activities() {
     });
   };
 
-  const handleDelete = (event, id) => {
+  const openModal = (id) => {
+    setCardToDelete(id);
+    document.getElementById("my_modal_1").showModal();
+  };
+
+  const handleDelete = () => {
     setIsLoading(true);
-    axios.delete(`http://localhost:3001/activities/${id}`).then(() => {
-      console.log("deleted");
-      fetchActivities();
-    });
+    axios
+      .delete(`http://localhost:3001/activities/${cardToDelete}`)
+      .then(() => {
+        console.log("deleted");
+        fetchActivities();
+      });
   };
 
   if (isLoading) {
@@ -152,7 +167,9 @@ function Activities() {
 
               <label className="form-control w-full max-w-xs">
                 <div className="label capitalize">
-                  <span className="label-text">Description</span>
+                  <span className="label-text">
+                    <span className="text-error">* </span>Description
+                  </span>
                 </div>
                 <textarea
                   id="description"
@@ -183,7 +200,7 @@ function Activities() {
           <p className="text-center">There are no activities...</p>
         )}
         {data &&
-          data.map((x, index) => {
+          data.map((x) => {
             return (
               <div className="relative" key={x.id}>
                 <List url="activities" id={x.id} className="relative">
@@ -201,8 +218,9 @@ function Activities() {
                 </List>
                 {isAdmin && (
                   <button
+                    title="Delete"
                     className="btn btn-error absolute bottom-5 right-32"
-                    onClick={(event) => handleDelete(event, x.id)}
+                    onClick={() => openModal(x.id)}
                   >
                     <FaTrash />
                   </button>
@@ -211,6 +229,7 @@ function Activities() {
             );
           })}
       </div>
+      <DeleteModal handleDelete={handleDelete} setToDelete={setCardToDelete} />
     </div>
   );
 }

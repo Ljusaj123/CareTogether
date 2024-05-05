@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CreateNew, Input, Filter, Title, Card } from "../components";
+import { CreateNew, Input, DeleteModal, Title, Card } from "../components";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 import { useContext } from "react";
@@ -11,6 +11,7 @@ function Associations() {
   const [form, setForm] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { isAdmin } = useContext(UserContext);
+  const [cardToDelete, setCardToDelete] = useState("");
 
   const fetchAssociations = async () => {
     setIsLoading(true);
@@ -24,12 +25,14 @@ function Associations() {
     fetchAssociations();
   }, []);
 
-  const handleDelete = (id) => {
+  const handleDelete = () => {
     setIsLoading(true);
-    axios.delete(`http://localhost:3001/associations/${id}`).then(() => {
-      console.log("deleted");
-      fetchAssociations();
-    });
+    axios
+      .delete(`http://localhost:3001/associations/${cardToDelete}`)
+      .then(() => {
+        console.log("deleted");
+        fetchAssociations();
+      });
   };
 
   const handleCheck = (id) => {
@@ -50,6 +53,11 @@ function Associations() {
         console.log("created");
         fetchAssociations();
       });
+  };
+
+  const openModal = (id) => {
+    setCardToDelete(id);
+    document.getElementById("my_modal_1").showModal();
   };
 
   if (isLoading) {
@@ -119,8 +127,9 @@ function Associations() {
                 <p>{x.description}</p>
                 {isAdmin && (
                   <button
+                    title="Delete"
                     className="btn btn-error"
-                    onClick={() => handleDelete(x.id)}
+                    onClick={() => openModal(x.id)}
                   >
                     <FaTrash />
                   </button>
@@ -151,7 +160,7 @@ function Associations() {
                       <div className="flex gap-4">
                         <button
                           className="btn btn-error"
-                          onClick={() => handleDelete(x.id)}
+                          onClick={() => openModal(x.id)}
                         >
                           <FaTrash />
                         </button>
@@ -168,6 +177,10 @@ function Associations() {
               }
             })}
           </div>
+          <DeleteModal
+            handleDelete={handleDelete}
+            setToDelete={setCardToDelete}
+          />
         </div>
       )}
     </div>

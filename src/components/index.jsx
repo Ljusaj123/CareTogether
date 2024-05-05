@@ -8,6 +8,7 @@ import Input from "./Input";
 import List from "./List";
 import Select from "./Select";
 import Title from "./Title";
+import DeleteModal from "./DeleteModal";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   Select,
   Title,
   List,
+  DeleteModal,
 };

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Input } from "../components";
+import { Input, DeleteModal } from "../components";
 import { FaTrash } from "react-icons/fa6";
 import { useContext } from "react";
 import UserContext from "../context";
@@ -11,6 +11,7 @@ function SingleActivity() {
   const [activity, setActivity] = useState([]);
   const [form, setForm] = useState({});
   const { isAdmin } = useContext(UserContext);
+  const [applicantToDelete, setApplicantToDelete] = useState("");
 
   const fetchActivities = async () => {
     axios.get(`http://localhost:3001/activities/${id}`).then((response) => {
@@ -33,9 +34,9 @@ function SingleActivity() {
       });
   };
 
-  const handleDelete = (e, applicant) => {
+  const handleDelete = () => {
     const filteredApplicants = applicants.filter((x) => {
-      return x !== applicant;
+      return x !== applicantToDelete;
     });
     axios
       .patch(`http://localhost:3001/activities/${id}`, {
@@ -46,6 +47,11 @@ function SingleActivity() {
         console.log("deleted");
         fetchActivities();
       });
+  };
+
+  const openModal = (applicant) => {
+    setApplicantToDelete(applicant);
+    document.getElementById("my_modal_1").showModal();
   };
 
   const { name, date, description, organization, applicants, location } =
@@ -92,8 +98,9 @@ function SingleActivity() {
                 <p className="text-lg my-4">{applicant}</p>
                 {isAdmin && (
                   <button
+                    title="Delete"
                     className="btn btn-error"
-                    onClick={(e) => handleDelete(e, applicant)}
+                    onClick={() => openModal(applicant)}
                   >
                     <FaTrash />
                   </button>
@@ -102,6 +109,10 @@ function SingleActivity() {
             );
           })}
       </div>
+      <DeleteModal
+        handleDelete={handleDelete}
+        setToDelete={setApplicantToDelete}
+      />
     </div>
   );
 }

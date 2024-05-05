@@ -1,5 +1,13 @@
 import { useEffect, useState, useContext } from "react";
-import { CreateNew, Input, Filter, Title, Card, Select } from "../components";
+import {
+  CreateNew,
+  Input,
+  Filter,
+  Title,
+  Card,
+  Select,
+  DeleteModal,
+} from "../components";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 import { FiEdit3 } from "react-icons/fi";
@@ -16,6 +24,7 @@ function Volunteers() {
   const { isAdmin } = useContext(UserContext);
   const [cardToEdit, setCardToEdit] = useState("");
   const [editMode, setEditMode] = useState(false);
+  const [cardToDelete, setCardToDelete] = useState("");
 
   const fetchVolunteers = () => {
     setIsLoading(true);
@@ -39,12 +48,19 @@ function Volunteers() {
     });
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = () => {
     setIsLoading(true);
-    axios.delete(`http://localhost:3001/volunteers/${id}`).then(() => {
-      console.log("deleted");
-      fetchVolunteers();
-    });
+    axios
+      .delete(`http://localhost:3001/volunteers/${cardToDelete}`)
+      .then(() => {
+        console.log("deleted");
+        fetchVolunteers();
+      });
+  };
+
+  const openModal = (id) => {
+    setCardToDelete(id);
+    document.getElementById("my_modal_1").showModal();
   };
 
   const handleFilter = (e) => {
@@ -302,7 +318,7 @@ function Volunteers() {
                     <button
                       title="Delete"
                       className="btn btn-error"
-                      onClick={() => handleDelete(x.id)}
+                      onClick={() => openModal(x.id)}
                     >
                       <FaTrash />
                     </button>
@@ -319,6 +335,7 @@ function Volunteers() {
           );
         })}
       </div>
+      <DeleteModal handleDelete={handleDelete} setToDelete={setCardToDelete} />
     </div>
   );
 }

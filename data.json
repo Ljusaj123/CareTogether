@@ -50,10 +50,7 @@
       "date": "2024-05-13T10:00:00.000Z",
       "description": "Join us for a fulfilling day of volunteering at the local animal shelter. You'll have the opportunity to interact with adorable dogs and cats, providing them with care, love, and attention. Whether you're walking dogs, cleaning kennels, or socializing with the animals, your contribution will make a meaningful difference in their lives.",
       "applicants": [
-        "Jane Smith",
-        "Alice Johnson",
-        "John Doe",
-        "John Doe"
+        "Jane Smith"
       ],
       "organization": "Paws for Hope",
       "location": "123 Oak Street, Springfield"
@@ -92,8 +89,7 @@
       "description": "Join us for an informative workshop on elderly care where you'll learn valuable skills and techniques for providing support and assistance to seniors in our community. Whether you're a caregiver, family member, or simply interested in helping the elderly, this workshop will provide you with practical knowledge and resources to make a positive impact in the lives of older adults.",
       "applicants": [
         "Jessica Adams",
-        "William Smith",
-        "Emma Roberts"
+        "William Smith"
       ],
       "organization": "Senior Care Alliance",
       "location": "555 Maple Lane, Cedarville"
@@ -113,15 +109,6 @@
     }
   ],
   "volunteers": [
-    {
-      "id": "1",
-      "name": "Alice Johnson",
-      "email": "alice@example.com",
-      "association": "Community Action Coalition",
-      "town": "Springfield",
-      "interests": "Community service, Environmental activism",
-      "availability": "Weekends, Evenings"
-    },
     {
       "id": "2",
       "name": "David Smith",
