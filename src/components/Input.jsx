@@ -1,6 +1,14 @@
 import React from "react";
 
-function Input({ type, name, label, placeholderText, setForm, required }) {
+function Input({
+  type,
+  name,
+  label,
+  placeholderText,
+  setForm,
+  required,
+  defaultValue,
+}) {
   const handleInput = (e) => {
     const { name, value } = e.target;
     setForm((prev) => {
@@ -23,6 +31,7 @@ function Input({ type, name, label, placeholderText, setForm, required }) {
         placeholder={placeholderText ?? "Type here..."}
         className="input input-bordered input-primary w-full max-w-xs"
         required={required ?? false}
+        defaultValue={defaultValue}
       />
     </label>
   );

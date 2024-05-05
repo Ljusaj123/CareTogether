@@ -4,6 +4,8 @@ import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 import { FiEdit3 } from "react-icons/fi";
 import UserContext from "../context";
+import { LuSave } from "react-icons/lu";
+import { MdCancel } from "react-icons/md";
 
 function Volunteers() {
   const [data, setData] = useState([]);
@@ -12,6 +14,8 @@ function Volunteers() {
   const [isLoading, setIsLoading] = useState(false);
   const [filter, setFilter] = useState({});
   const { isAdmin } = useContext(UserContext);
+  const [cardToEdit, setCardToEdit] = useState("");
+  const [editMode, setEditMode] = useState(false);
 
   const fetchVolunteers = () => {
     setIsLoading(true);
@@ -63,7 +67,17 @@ function Volunteers() {
     fetchVolunteers();
   };
 
-  const handleEdit = (id) => {};
+  const handleEdit = (id) => {
+    setEditMode(true);
+    setCardToEdit(id);
+  };
+
+  const handleSave = (id) => {
+    axios
+      .patch(`http://localhost:3001/volunteers/${id}`, form)
+      .then(() => fetchVolunteers());
+    setEditMode(false);
+  };
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -111,14 +125,14 @@ function Volunteers() {
             <Input
               type="text"
               name="interests"
-              label="interests"
+              label="interests (use comma to seperate)"
               setForm={setForm}
             />
 
             <Input
               type="text"
               name="availability"
-              label="availability"
+              label="availability (use comma to seperate)"
               setForm={setForm}
             />
 
@@ -170,19 +184,76 @@ function Volunteers() {
         {filteredData.map((x) => {
           return (
             <Card key={x.id}>
-              <h3 className="card-title capitalize font-medium text-xl text-primary">
-                {x.name}
-              </h3>
-              <p className=" text-lg text-secondary font-bold">
-                {x.association}
-              </p>
-              <h4 className="text-md text-neutral">{x.email}</h4>
-              <h4 className="capitalize text-md text-neutral underline">
-                {x.town}
-              </h4>
+              {editMode && x.id === cardToEdit ? (
+                <Input
+                  type="text"
+                  name="name"
+                  label="name"
+                  required={true}
+                  defaultValue={x.name}
+                  setForm={setForm}
+                />
+              ) : (
+                <h3 className="card-title capitalize font-medium text-xl text-primary">
+                  {x.name}
+                </h3>
+              )}
+
+              {editMode && x.id === cardToEdit ? (
+                <Input
+                  type="text"
+                  name="association"
+                  label="association"
+                  required={true}
+                  defaultValue={x.association}
+                  setForm={setForm}
+                />
+              ) : (
+                <h4 className=" text-lg text-secondary font-bold">
+                  {x.association}
+                </h4>
+              )}
+
+              {editMode && x.id === cardToEdit ? (
+                <Input
+                  type="email"
+                  name="email"
+                  label="email"
+                  required={true}
+                  defaultValue={x.email}
+                  setForm={setForm}
+                />
+              ) : (
+                <p className="text-md text-neutral">{x.email}</p>
+              )}
+
+              {editMode && x.id === cardToEdit ? (
+                <Input
+                  type="text"
+                  name="town"
+                  label="town"
+                  required={true}
+                  defaultValue={x.town}
+                  setForm={setForm}
+                />
+              ) : (
+                <p className="capitalize text-md text-neutral underline">
+                  {x.town}
+                </p>
+              )}
+
               <p className="font-bold">Interests</p>
 
-              {x.interests ? (
+              {editMode && x.id === cardToEdit ? (
+                <Input
+                  type="text"
+                  name="interests"
+                  label="interests (use comma to seperate)"
+                  required={true}
+                  defaultValue={x.interests}
+                  setForm={setForm}
+                />
+              ) : x.interests ? (
                 x.interests.split(",").map((interest, index) => {
                   return <p key={index}>{interest}</p>;
                 })
@@ -191,29 +262,59 @@ function Volunteers() {
               )}
 
               <p className="font-bold">Availability</p>
-              {x.availability ? (
+
+              {editMode && x.id === cardToEdit ? (
+                <Input
+                  type="text"
+                  name="availability"
+                  label="availability (use comma to seperate)"
+                  required={true}
+                  defaultValue={x.availability}
+                  setForm={setForm}
+                />
+              ) : x.availability ? (
                 x.availability.split(",").map((a, index) => {
                   return <p key={index}>{a}</p>;
                 })
               ) : (
                 <p>None</p>
               )}
-              {isAdmin && (
-                <div className="flex gap-4">
-                  <button
-                    className="btn btn-error"
-                    onClick={() => handleDelete(x.id)}
-                  >
-                    <FaTrash />
-                  </button>
-                  <button
-                    className="btn btn-warning"
-                    onClick={() => handleEdit(x.id)}
-                  >
-                    <FiEdit3 />
-                  </button>
-                </div>
-              )}
+              {isAdmin &&
+                (editMode && x.id === cardToEdit ? (
+                  <div className="flex gap-4">
+                    <button
+                      title="Save"
+                      className="btn btn-warning"
+                      onClick={() => handleSave(x.id)}
+                    >
+                      <LuSave />
+                    </button>
+                    <button
+                      title="Cancel"
+                      className="btn btn-error"
+                      onClick={() => setEditMode(false)}
+                    >
+                      <MdCancel />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-4">
+                    <button
+                      title="Delete"
+                      className="btn btn-error"
+                      onClick={() => handleDelete(x.id)}
+                    >
+                      <FaTrash />
+                    </button>
+                    <button
+                      title="Edit"
+                      className="btn btn-warning"
+                      onClick={() => handleEdit(x.id)}
+                    >
+                      <FiEdit3 />
+                    </button>
+                  </div>
+                ))}
             </Card>
           );
         })}
